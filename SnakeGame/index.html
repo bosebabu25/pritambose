@@ -1,42 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnakeMania - Ek Gaming Katha</title>
-    <script>     // ================PREVENT RIGHT CLICK================
-    document.addEventListener("contextmenu", function(evt){
-      evt.preventDefault();
-    });
-  </script>
+&lt;!DOCTYPE&nbsp;html&gt;
+&lt;html&nbsp;lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;charset=&quot;UTF&#45;8&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;http&#45;equiv=&quot;X&#45;UA&#45;Compatible&quot;&nbsp;content=&quot;IE=edge&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;name=&quot;viewport&quot;&nbsp;content=&quot;width=device&#45;width,&nbsp;initial&#45;scale=1.0&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;SnakeMania&nbsp;&#45;&nbsp;Ek&nbsp;Gaming&nbsp;Katha&lt;/title&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;================PREVENT&nbsp;RIGHT&nbsp;CLICK================
+&nbsp;&nbsp;&nbsp;&nbsp;document.addEventListener(&quot;contextmenu&quot;,&nbsp;function(evt){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;evt.preventDefault();
+&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&lt;/script&gt;
 
-  <!-- TO PREVENT COPY TEXT, USE ANY ONE OF THESE TWO METHODS ———› EITHER JS OR CSS-->
+&nbsp;&nbsp;&lt;!&#45;&#45;&nbsp;TO&nbsp;PREVENT&nbsp;COPY&nbsp;TEXT,&nbsp;USE&nbsp;ANY&nbsp;ONE&nbsp;OF&nbsp;THESE&nbsp;TWO&nbsp;METHODS&nbsp;———›&nbsp;EITHER&nbsp;JS&nbsp;OR&nbsp;CSS&#45;&#45;&gt;
 
-  <script>  // PREVENT FROM COPY
-    document.addEventListener("copy", function(evt){
-      // prevent CLIPBOARD TEXT
-      evt.clipboardData.setData("text/plain", "Alart!!");
-      // PREVENT DEFAULT COPY
-      evt.preventDefault();
-    })
-  </script>
+&nbsp;&nbsp;&lt;script&gt;&nbsp;&nbsp;//&nbsp;PREVENT&nbsp;FROM&nbsp;COPY
+&nbsp;&nbsp;&nbsp;&nbsp;document.addEventListener(&quot;copy&quot;,&nbsp;function(evt){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;prevent&nbsp;CLIPBOARD&nbsp;TEXT
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;evt.clipboardData.setData(&quot;text/plain&quot;,&nbsp;&quot;Alart!!&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;PREVENT&nbsp;DEFAULT&nbsp;COPY
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;evt.preventDefault();
+&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;&lt;/script&gt;
 
-  <!-- PREVENT FROM COPY -->
-  <style>
-    *{
-      user-select: none;
-    }
-  </style>
-  <!-- ENND PREVENT COPY -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body oncontextmenu="return false">
-    <div class="body">
-        <div id="scoreBox">Score: 0</div>
-        <div id="hiscoreBox">HiScore: 0</div>
-        <div id="board"></div>
-    </div>
-</body>
-<script src="js/index.js"></script>
-</html>
+&nbsp;&nbsp;&lt;!&#45;&#45;&nbsp;PREVENT&nbsp;FROM&nbsp;COPY&nbsp;&#45;&#45;&gt;
+&nbsp;&nbsp;&lt;style&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;*{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user&#45;select:&nbsp;none;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&lt;/style&gt;
+&nbsp;&nbsp;&lt;!&#45;&#45;&nbsp;ENND&nbsp;PREVENT&nbsp;COPY&nbsp;&#45;&#45;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link&nbsp;rel=&quot;stylesheet&quot;&nbsp;href=&quot;css/style.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&nbsp;oncontextmenu=&quot;return&nbsp;false&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class=&quot;body&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=&quot;scoreBox&quot;&gt;Score:&nbsp;0&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=&quot;hiscoreBox&quot;&gt;HiScore:&nbsp;0&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=&quot;board&quot;&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&nbsp;src=&quot;js/index.js&quot;&gt;&lt;/script&gt;
+&lt;/html&gt;
