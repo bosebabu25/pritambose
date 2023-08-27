@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnakeMania - Ek Gaming Katha</title>
+    <script>     // ================PREVENT RIGHT CLICK================
+    document.addEventListener("contextmenu", function(evt){
+      evt.preventDefault();
+    });
+  </script>
+
+  <!-- TO PREVENT COPY TEXT, USE ANY ONE OF THESE TWO METHODS ———› EITHER JS OR CSS-->
+
+  <script>  // PREVENT FROM COPY
+    document.addEventListener("copy", function(evt){
+      // prevent CLIPBOARD TEXT
+      evt.clipboardData.setData("text/plain", "Alart!!");
+      // PREVENT DEFAULT COPY
+      evt.preventDefault();
+    })
+  </script>
+
+  <!-- PREVENT FROM COPY -->
+  <style>
+    *{
+      user-select: none;
+    }
+  </style>
+  <!-- ENND PREVENT COPY -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body oncontextmenu="return false">
+    <div class="body">
+        <div id="scoreBox">Score: 0</div>
+        <div id="hiscoreBox">HiScore: 0</div>
+        <div id="board"></div>
+    </div>
+</body>
+<script src="js/index.js"></script>
+</html>
