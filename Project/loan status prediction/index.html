@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Loan Status Prediction</title>
+
+  <script>
+    document.addEventListener("copy", function(evt){
+      // prevent CLIPBOARD TEXT
+      evt.clipboardData.setData("text/plain", "Alart!!");
+      // PREVENT DEFAULT COPY
+      evt.preventDefault();
+    })
+  </script>
+
+  <style>
+    *{
+      user-select: none;
+    }
+  </style>
+
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body oncontextmenu="return false">
+<section id="loan-prediction" class="cell markdown" id="Ys38Eii0k6mw">
+<h1>loan prediction</h1>
+</section>
+<section id="import-files" class="cell markdown" id="pPIDgAPik9k_">
+<h2>import files</h2>
+</section>
+<div class="cell code" data-execution_count="43"
+data-executionInfo="{&quot;elapsed&quot;:477,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138112796,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="oMhOTv6gkok_">
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span></code></pre></div>
+</div>
+<section id="import-dataset" class="cell markdown" id="_5gDGCd7wOJU">
+<h2>import dataset</h2>
+</section>
+<div class="cell code" data-execution_count="44"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:243}"
+data-executionInfo="{&quot;elapsed&quot;:27,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138113385,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="ZNIbaculvz7H" data-outputId="961d98a2-d8f9-4887-e084-de2f3b2eedfe">
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;loan.csv&#39;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="44">
+
+  <div id="df-9183ba89-056e-4c08-b38f-a267264fff40" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Loan_ID</th>
+      <th>Gender</th>
+      <th>Married</th>
+      <th>Dependents</th>
+      <th>Education</th>
+      <th>Self_Employed</th>
+      <th>ApplicantIncome</th>
+      <th>CoapplicantIncome</th>
+      <th>LoanAmount</th>
+      <th>Loan_Amount_Term</th>
+      <th>Credit_History</th>
+      <th>Property_Area</th>
+      <th>Loan_Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>LP001002</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>0</td>
+      <td>Graduate</td>
+      <td>No</td>
+      <td>5849</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Urban</td>
+      <td>Y</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LP001003</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>1</td>
+      <td>Graduate</td>
+      <td>No</td>
+      <td>4583</td>
+      <td>1508.0</td>
+      <td>128.0</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Rural</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LP001005</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>0</td>
+      <td>Graduate</td>
+      <td>Yes</td>
+      <td>3000</td>
+      <td>0.0</td>
+      <td>66.0</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Urban</td>
+      <td>Y</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>LP001006</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>0</td>
+      <td>Not Graduate</td>
+      <td>No</td>
+      <td>2583</td>
+      <td>2358.0</td>
+      <td>120.0</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Urban</td>
+      <td>Y</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>LP001008</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>0</td>
+      <td>Graduate</td>
+      <td>No</td>
+      <td>6000</td>
+      <td>0.0</td>
+      <td>141.0</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Urban</td>
+      <td>Y</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-9183ba89-056e-4c08-b38f-a267264fff40')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-9183ba89-056e-4c08-b38f-a267264fff40 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-9183ba89-056e-4c08-b38f-a267264fff40');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-addaca49-59f2-4f8b-be5a-b4fb1f910f4d">
+  <button class="colab-df-quickchart" onclick="quickchart('df-addaca49-59f2-4f8b-be5a-b4fb1f910f4d')"
+            title="Suggest charts."
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+    background-color: #E8F0FE;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: #1967D2;
+    height: 32px;
+    padding: 0 0 0 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-quickchart:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const charts = await google.colab.kernel.invokeFunction(
+          'suggestCharts', [key], {});
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-addaca49-59f2-4f8b-be5a-b4fb1f910f4d button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+
+</div>
+</div>
+<div class="cell code" data-execution_count="45"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:27,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138113388,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="u8jNKGkWw-aE" data-outputId="2c556276-bdd1-457f-8716-da1b1cb5031e">
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code></pre></div>
+<div class="output execute_result" data-execution_count="45">
+<pre><code>(614, 13)</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="46"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:29,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138113391,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="QvEPefRVxVRD" data-outputId="a7ba2aef-2dc0-40a1-ea7c-96d2ede6156a">
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data.info()</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 614 entries, 0 to 613
+Data columns (total 13 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   Loan_ID            614 non-null    object 
+ 1   Gender             601 non-null    object 
+ 2   Married            611 non-null    object 
+ 3   Dependents         599 non-null    object 
+ 4   Education          614 non-null    object 
+ 5   Self_Employed      582 non-null    object 
+ 6   ApplicantIncome    614 non-null    int64  
+ 7   CoapplicantIncome  614 non-null    float64
+ 8   LoanAmount         592 non-null    float64
+ 9   Loan_Amount_Term   600 non-null    float64
+ 10  Credit_History     564 non-null    float64
+ 11  Property_Area      614 non-null    object 
+ 12  Loan_Status        614 non-null    object 
+dtypes: float64(4), int64(1), object(8)
+memory usage: 62.5+ KB
+</code></pre>
+</div>
+</div>
+<section id="train-our-data" class="cell markdown" id="b_c-yUQXw7ww">
+<h2>Train our Data</h2>
+</section>
+<div class="cell markdown" id="gdlfIFDXx7je">
+<p><em>drop the column which is not relevant</em></p>
+</div>
+<div class="cell code" data-execution_count="47"
+data-executionInfo="{&quot;elapsed&quot;:29,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138113392,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="v5AoxD7FxS3n">
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop(columns<span class="op">=</span>[<span class="st">&#39;Loan_ID&#39;</span>])</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="48"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:243}"
+data-executionInfo="{&quot;elapsed&quot;:29,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138113393,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="VdfNCZvvyRUq" data-outputId="b2b5d421-9e37-49b9-d344-ea4e99554bfa">
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="48">
+
+  <div id="df-8b5aebd0-f132-480e-9dfd-79273f7e18c0" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Gender</th>
+      <th>Married</th>
+      <th>Dependents</th>
+      <th>Education</th>
+      <th>Self_Employed</th>
+      <th>ApplicantIncome</th>
+      <th>CoapplicantIncome</th>
+      <th>LoanAmount</th>
+      <th>Loan_Amount_Term</th>
+      <th>Credit_History</th>
+      <th>Property_Area</th>
+      <th>Loan_Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Male</td>
+      <td>No</td>
+      <td>0</td>
+      <td>Graduate</td>
+      <td>No</td>
+      <td>5849</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Urban</td>
+      <td>Y</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>1</td>
+      <td>Graduate</td>
+      <td>No</td>
+      <td>4583</td>
+      <td>1508.0</td>
+      <td>128.0</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Rural</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>0</td>
+      <td>Graduate</td>
+      <td>Yes</td>
+      <td>3000</td>
+      <td>0.0</td>
+      <td>66.0</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Urban</td>
+      <td>Y</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>0</td>
+      <td>Not Graduate</td>
+      <td>No</td>
+      <td>2583</td>
+      <td>2358.0</td>
+      <td>120.0</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Urban</td>
+      <td>Y</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Male</td>
+      <td>No</td>
+      <td>0</td>
+      <td>Graduate</td>
+      <td>No</td>
+      <td>6000</td>
+      <td>0.0</td>
+      <td>141.0</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>Urban</td>
+      <td>Y</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-8b5aebd0-f132-480e-9dfd-79273f7e18c0')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-8b5aebd0-f132-480e-9dfd-79273f7e18c0 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-8b5aebd0-f132-480e-9dfd-79273f7e18c0');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-432aeda9-7a25-45ae-98e8-9784217f41c3">
+  <button class="colab-df-quickchart" onclick="quickchart('df-432aeda9-7a25-45ae-98e8-9784217f41c3')"
+            title="Suggest charts."
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+    background-color: #E8F0FE;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: #1967D2;
+    height: 32px;
+    padding: 0 0 0 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-quickchart:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const charts = await google.colab.kernel.invokeFunction(
+          'suggestCharts', [key], {});
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-432aeda9-7a25-45ae-98e8-9784217f41c3 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+
+</div>
+</div>
+<section id="exploratory-data-analysis" class="cell markdown"
+id="GswvPq_TyeXv">
+<h3>exploratory data analysis</h3>
+</section>
+<div class="cell code" data-execution_count="49"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:29,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138113394,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="pGxU2-f_yl4_" data-outputId="1f400c0b-e463-4255-d15c-d98f06045b56">
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Loan_Status&#39;</span>].value_counts()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="49">
+<pre><code>Y    422
+N    192
+Name: Loan_Status, dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="50"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:367}"
+data-executionInfo="{&quot;elapsed&quot;:590,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138113956,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="-Mr76u91Yd0I" data-outputId="59e9eb08-cc4e-4a2f-a640-63a0fc04dcc3">
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> <span class="st">&#39;Yes&#39;</span>, <span class="st">&#39;No&#39;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> [data.Loan_Status[data[<span class="st">&#39;Loan_Status&#39;</span>]<span class="op">==</span><span class="st">&#39;Y&#39;</span>].count(), data.Loan_Status[data[<span class="st">&#39;Loan_Status&#39;</span>]<span class="op">==</span><span class="st">&#39;N&#39;</span>].count()]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>explode <span class="op">=</span> (<span class="dv">0</span>, <span class="fl">0.1</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>fig1, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>ax1.pie(sizes, explode<span class="op">=</span>explode, labels<span class="op">=</span>labels, autopct<span class="op">=</span><span class="st">&#39;</span><span class="sc">%1.1f%%</span><span class="st">&#39;</span>, shadow<span class="op">=</span><span class="va">True</span>, startangle<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ax1.axis(<span class="st">&#39;equal&#39;</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;loan status&#39;</span>, size<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="output display_data">
+<p><img
+src="vertopal_2041085aa6f5463380289c55835b3799/6aede0638c448b112fe6873bc238eddb4bed469c.png" /></p>
+</div>
+</div>
+<section id="univariate-analysis" class="cell markdown"
+id="f-jWdLjCg5V2">
+<h3>univariate analysis</h3>
+</section>
+<div class="cell code" data-execution_count="51"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:9,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138113957,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="2d2eOh3Sn-ON" data-outputId="cfc97854-9eee-4c2e-d4e8-bd14e0e7d92a">
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code></pre></div>
+<div class="output execute_result" data-execution_count="51">
+<pre><code>Index([&#39;Gender&#39;, &#39;Married&#39;, &#39;Dependents&#39;, &#39;Education&#39;, &#39;Self_Employed&#39;,
+       &#39;ApplicantIncome&#39;, &#39;CoapplicantIncome&#39;, &#39;LoanAmount&#39;,
+       &#39;Loan_Amount_Term&#39;, &#39;Credit_History&#39;, &#39;Property_Area&#39;, &#39;Loan_Status&#39;],
+      dtype=&#39;object&#39;)</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="52"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}"
+data-executionInfo="{&quot;elapsed&quot;:2584,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138116533,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="EYpfZWh4dvPC" data-outputId="311f075e-6097-420f-a826-b5686427546a">
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">6</span>, ncols<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">20</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>cols<span class="op">=</span>[<span class="st">&#39;Gender&#39;</span>,<span class="st">&#39;Married&#39;</span>, <span class="st">&#39;Dependents&#39;</span>, <span class="st">&#39;Education&#39;</span>, <span class="st">&#39;Self_Employed&#39;</span>, <span class="st">&#39;Property_Area&#39;</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ind, col <span class="kw">in</span> <span class="bu">enumerate</span>(cols):</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  sns.countplot(x<span class="op">=</span>col, data<span class="op">=</span>data, ax<span class="op">=</span>ax[ind])</span></code></pre></div>
+<div class="output display_data">
+<p><img
+src="vertopal_2041085aa6f5463380289c55835b3799/bea7f7fe4f6ffa080329b654a64c97ff17b29dd9.png" /></p>
+</div>
+</div>
+<section id="bi-variate-analysisdependents" class="cell markdown"
+id="u4vgiI74oln4">
+<h3>Bi-Variate AnalysisDependents</h3>
+<p>Count column plots to map the dependencce of 'Loan_Status', column on
+categorical features</p>
+</section>
+<div class="cell code" data-execution_count="53"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:582}"
+data-executionInfo="{&quot;elapsed&quot;:1190,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138117697,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="QnUu94iiopS5" data-outputId="6dabeee8-caef-4b01-db00-ad3ef23d5f53">
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">30</span>,<span class="dv">15</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;Gender&#39;</span>, hue<span class="op">=</span><span class="st">&#39;Loan_Status&#39;</span>, data<span class="op">=</span>data, palette<span class="op">=</span><span class="st">&#39;Set2&#39;</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>][<span class="dv">0</span>])</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;Married&#39;</span>, hue<span class="op">=</span><span class="st">&#39;Loan_Status&#39;</span>, data<span class="op">=</span>data, palette<span class="op">=</span><span class="st">&#39;Set2&#39;</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>][<span class="dv">1</span>])</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;Dependents&#39;</span>, hue<span class="op">=</span><span class="st">&#39;Loan_Status&#39;</span>, data<span class="op">=</span>data, palette<span class="op">=</span><span class="st">&#39;Set2&#39;</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>][<span class="dv">2</span>])</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;Education&#39;</span>, hue<span class="op">=</span><span class="st">&#39;Loan_Status&#39;</span>, data<span class="op">=</span>data, palette<span class="op">=</span><span class="st">&#39;Set2&#39;</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>][<span class="dv">0</span>])</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;Self_Employed&#39;</span>, hue<span class="op">=</span><span class="st">&#39;Loan_Status&#39;</span>, data<span class="op">=</span>data, palette<span class="op">=</span><span class="st">&#39;Set2&#39;</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>][<span class="dv">1</span>])</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;Property_Area&#39;</span>, hue<span class="op">=</span><span class="st">&#39;Loan_Status&#39;</span>, data<span class="op">=</span>data, palette<span class="op">=</span><span class="st">&#39;Set2&#39;</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>][<span class="dv">2</span>])</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="output display_data">
+<p><img
+src="vertopal_2041085aa6f5463380289c55835b3799/66c66ef87008988465bc2829b81abc82b43c8d40.png" /></p>
+</div>
+</div>
+<section id="corealation" class="cell markdown" id="fD5bUudIrpf8">
+<h3>Corealation</h3>
+<p>Display the co-realtion between variables using heatmap</p>
+</section>
+<div class="cell code" data-execution_count="54"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:891}"
+data-executionInfo="{&quot;elapsed&quot;:1214,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118898,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="JOkEgvTdr4HP" data-outputId="507f1b23-454c-4820-8178-4b00d7b80c6f">
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">10</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cor <span class="op">=</span> data.corr()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cor, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span>plt.cm.CMRmap_r)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="output stream stderr">
+<pre><code>&lt;ipython-input-54-c8f965688bad&gt;:2: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
+  cor = data.corr()
+</code></pre>
+</div>
+<div class="output display_data">
+<p><img
+src="vertopal_2041085aa6f5463380289c55835b3799/e1571f67dc719afe71787b0860f2edc3fa097a79.png" /></p>
+</div>
+</div>
+<section id="feature-engineering" class="cell markdown"
+id="7xPdKX4LxlfC">
+<h3>Feature Engineering</h3>
+<p>checking for missing values</p>
+</section>
+<div class="cell code" data-execution_count="55"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:42,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118899,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="rUFEenCax6O1" data-outputId="929dd322-28a9-44da-d201-cec7a7b64e01">
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data.isnull().<span class="bu">sum</span>()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="55">
+<pre><code>Gender               13
+Married               3
+Dependents           15
+Education             0
+Self_Employed        32
+ApplicantIncome       0
+CoapplicantIncome     0
+LoanAmount           22
+Loan_Amount_Term     14
+Credit_History       50
+Property_Area         0
+Loan_Status           0
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell markdown" id="fHfXEOU470TA">
+<p>we have some null values, so needto fill this by simple math</p>
+</div>
+<div class="cell code" data-execution_count="56"
+data-executionInfo="{&quot;elapsed&quot;:42,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118901,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="bXeWwvoZ7hMM">
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MOD</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Gender&#39;</span>].fillna(data[<span class="st">&#39;Gender&#39;</span>].mode()[<span class="dv">0</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Married&#39;</span>].fillna(data[<span class="st">&#39;Married&#39;</span>].mode()[<span class="dv">0</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Dependents&#39;</span>].fillna(data[<span class="st">&#39;Dependents&#39;</span>].mode()[<span class="dv">0</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Self_Employed&#39;</span>].fillna(data[<span class="st">&#39;Self_Employed&#39;</span>].mode()[<span class="dv">0</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Credit_History&#39;</span>].fillna(data[<span class="st">&#39;Credit_History&#39;</span>].mode()[<span class="dv">0</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># MEAN</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;LoanAmount&#39;</span>].fillna(data[<span class="st">&#39;LoanAmount&#39;</span>].mean(), inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Loan_Amount_Term&#39;</span>].fillna(data[<span class="st">&#39;Loan_Amount_Term&#39;</span>].mean(), inplace<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown" id="J4kjlCwBABp7">
+<p><strong>now check if there is any null value or not ↓</strong></p>
+</div>
+<div class="cell code" data-execution_count="57"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:42,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118902,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="OzStBqW_ABFN" data-outputId="23c623d3-45fa-4bf1-ede1-4039001134a6">
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data.isnull().<span class="bu">sum</span>()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="57">
+<pre><code>Gender               0
+Married              0
+Dependents           0
+Education            0
+Self_Employed        0
+ApplicantIncome      0
+CoapplicantIncome    0
+LoanAmount           0
+Loan_Amount_Term     0
+Credit_History       0
+Property_Area        0
+Loan_Status          0
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell markdown" id="PZQZnzevBTVG">
+<p><strong>handling categorical variable</strong></p>
+</div>
+<div class="cell code" data-execution_count="58"
+data-executionInfo="{&quot;elapsed&quot;:41,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118903,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="23WD_N6RAxWY">
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data.Loan_Status <span class="op">=</span> data.Loan_Status.replace({<span class="st">&#39;Y&#39;</span>:<span class="dv">1</span>, <span class="st">&#39;N&#39;</span>:<span class="dv">0</span>})</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>data.Gender <span class="op">=</span> data.Gender.replace({<span class="st">&#39;Male&#39;</span>:<span class="dv">1</span>, <span class="st">&#39;Female&#39;</span>:<span class="dv">0</span>})</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>data.Married <span class="op">=</span> data.Married.replace({<span class="st">&#39;Yes&#39;</span>:<span class="dv">1</span>, <span class="st">&#39;No&#39;</span>:<span class="dv">0</span>})</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>data.Self_Employed <span class="op">=</span> data.Self_Employed.replace({<span class="st">&#39;Yes&#39;</span>:<span class="dv">1</span>, <span class="st">&#39;No&#39;</span>:<span class="dv">0</span>})</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="59"
+data-executionInfo="{&quot;elapsed&quot;:42,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118904,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="JEk6USc7CZhN">
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>feature_col <span class="op">=</span> [<span class="st">&#39;Property_Area&#39;</span>, <span class="st">&#39;Education&#39;</span>, <span class="st">&#39;Dependents&#39;</span>]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>le <span class="op">=</span> LabelEncoder()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> feature_col:</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  data[col] <span class="op">=</span> le.fit_transform(data[col])</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="60"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:383}"
+data-executionInfo="{&quot;elapsed&quot;:43,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118905,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="OgFe4sJNDeCH" data-outputId="a93821c3-f94a-43a9-8f01-53b2bc72b94c">
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">10</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="60">
+
+  <div id="df-e9274a7b-8cce-4d20-b970-d604e0168a03" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Gender</th>
+      <th>Married</th>
+      <th>Dependents</th>
+      <th>Education</th>
+      <th>Self_Employed</th>
+      <th>ApplicantIncome</th>
+      <th>CoapplicantIncome</th>
+      <th>LoanAmount</th>
+      <th>Loan_Amount_Term</th>
+      <th>Credit_History</th>
+      <th>Property_Area</th>
+      <th>Loan_Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5849</td>
+      <td>0.0</td>
+      <td>146.412162</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4583</td>
+      <td>1508.0</td>
+      <td>128.000000</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3000</td>
+      <td>0.0</td>
+      <td>66.000000</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2583</td>
+      <td>2358.0</td>
+      <td>120.000000</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6000</td>
+      <td>0.0</td>
+      <td>141.000000</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>5417</td>
+      <td>4196.0</td>
+      <td>267.000000</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2333</td>
+      <td>1516.0</td>
+      <td>95.000000</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3036</td>
+      <td>2504.0</td>
+      <td>158.000000</td>
+      <td>360.0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4006</td>
+      <td>1526.0</td>
+      <td>168.000000</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>12841</td>
+      <td>10968.0</td>
+      <td>349.000000</td>
+      <td>360.0</td>
+      <td>1.0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-e9274a7b-8cce-4d20-b970-d604e0168a03')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-e9274a7b-8cce-4d20-b970-d604e0168a03 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-e9274a7b-8cce-4d20-b970-d604e0168a03');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-e5c0d496-493f-4bf4-9a55-dc4d4e134052">
+  <button class="colab-df-quickchart" onclick="quickchart('df-e5c0d496-493f-4bf4-9a55-dc4d4e134052')"
+            title="Suggest charts."
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+    background-color: #E8F0FE;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: #1967D2;
+    height: 32px;
+    padding: 0 0 0 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-quickchart:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const charts = await google.colab.kernel.invokeFunction(
+          'suggestCharts', [key], {});
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-e5c0d496-493f-4bf4-9a55-dc4d4e134052 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+
+</div>
+</div>
+<div class="cell markdown" id="pTd_oBKIED9X">
+<p>Finaly we have all the features with neumerical values</p>
+<hr />
+</div>
+<section id="prepare-our-dataset" class="cell markdown"
+id="flX-lzzxKjRq">
+<h4>prepare our dataset</h4>
+</section>
+<div class="cell markdown" id="rbievzagK2fT">
+<p>split Features and Target variable</p>
+</div>
+<div class="cell code" data-execution_count="61"
+data-executionInfo="{&quot;elapsed&quot;:42,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118906,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="ttWq9Ty4KnWU">
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[[<span class="st">&#39;Gender&#39;</span>, <span class="st">&#39;Married&#39;</span>, <span class="st">&#39;ApplicantIncome&#39;</span>, <span class="st">&#39;LoanAmount&#39;</span>, <span class="st">&#39;Credit_History&#39;</span>]]</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Loan_Status&#39;</span>]</span></code></pre></div>
+</div>
+<div class="cell markdown" id="LFMsOIppLxbM">
+<p>split into Train — Test data</p>
+</div>
+<div class="cell code" data-execution_count="62"
+data-executionInfo="{&quot;elapsed&quot;:42,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118907,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="R9CxQuEpMCiw">
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>x_train, x_test, y_train, y_test <span class="op">=</span> train_test_split(x, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>) <span class="co"># 80% of data for &quot;train&quot; and 20% of data for &quot;test&quot;</span></span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="63"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:43,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118908,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="AoqvZgpuM5gi" data-outputId="45909684-7f5e-4ffc-d2c5-16f1dbd0c7a5">
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x_train.shape, x_test.shape, y_train.shape, y_test.shape</span></code></pre></div>
+<div class="output execute_result" data-execution_count="63">
+<pre><code>((491, 5), (123, 5), (491,), (123,))</code></pre>
+</div>
+</div>
+<div class="cell markdown" id="7wvORtXmijOb">
+<p>Now, we need to choose the best algorithm.</p>
+<p>In my opinion, the best algorithm which is suiteable is the
+<strong>decision tree classifier</strong> because first thing is
+decision tree is highly interpretable, Second thing is we don't need to
+worry about scaling and all at the time of decision tree, because
+decision we do all the things in internally. Eat whites much better
+accuracy in comparison of other models like logistic algorithm or
+SVM</p>
+</div>
+<div class="cell code" data-execution_count="64"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:74}"
+data-executionInfo="{&quot;elapsed&quot;:44,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118910,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="MY7AlVWYkGlt" data-outputId="a9cc0e4e-e975-46a7-a48d-81fd18b0cdab">
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score,f1_score</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">3</span>, min_samples_leaf<span class="op">=</span><span class="dv">35</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>clf.fit(x_train, y_train)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="64">
+<style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DecisionTreeClassifier(max_depth=3, min_samples_leaf=35)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">DecisionTreeClassifier</label><div class="sk-toggleable__content"><pre>DecisionTreeClassifier(max_depth=3, min_samples_leaf=35)</pre></div></div></div></div></div>
+</div>
+</div>
+<div class="cell code" data-execution_count="65"
+data-executionInfo="{&quot;elapsed&quot;:43,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118911,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="HzaJZxs-lF4u">
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span>clf.predict(x_test)</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="66"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:44,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118912,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="TV3UBYP8lTlR" data-outputId="39c6cc40-ea7f-459d-811e-dd4157d796d7">
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>accuracy_score(y_pred, y_test)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="66">
+<pre><code>0.7886178861788617</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="67"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:45,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118914,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="RbEosbLWllmL" data-outputId="876d8b42-1c7f-4b3f-970f-c1a981c60a59">
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>f1_score(y_pred, y_test)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="67">
+<pre><code>0.8586956521739131</code></pre>
+</div>
+</div>
+<div class="cell markdown" id="k4pu4lvBnSEu">
+<p>Finally, it is not very well, but we are good to go</p>
+</div>
+<div class="cell code" data-execution_count="68"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:539}"
+data-executionInfo="{&quot;elapsed&quot;:45,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118915,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="E_LY4fexluoW" data-outputId="be5d0b6b-fd8a-491c-c012-2c23b51c0bdf">
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>tree_clf <span class="op">=</span> tree.DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>tree_clf.fit(x_train, y_train)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> tree.export_graphviz(tree_clf, feature_names <span class="op">=</span> x.columns.tolist())</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> graphviz.Source(dot_data)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>graph</span></code></pre></div>
+<div class="output execute_result" data-execution_count="68">
+<p><img
+src="vertopal_2041085aa6f5463380289c55835b3799/97c2b4d1f2c8c159153d1555ac0a2711a4eaa4f3.svg" /></p>
+</div>
+</div>
+<div class="cell markdown" id="5-2z6HITysl6">
+<p>Now, all the things are completed, we can save or model</p>
+</div>
+<div class="cell code" data-execution_count="69"
+data-executionInfo="{&quot;elapsed&quot;:46,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138118918,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="mF3l1fS3ylyf">
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>pickle_out <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;PredictionModel.pkl&#39;</span>, mode<span class="op">=</span><span class="st">&#39;wb&#39;</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>pickle.dump(clf, pickle_out)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>pickle_out.close()</span></code></pre></div>
+</div>
+<section
+id="model-deploymentof-the-loan-prediction-model-using-streamlit"
+class="cell markdown" id="XjO1lwW5zzu6">
+<h1>Model Deploymentof the <strong>Loan Prediction Model</strong> using
+Streamlit</h1>
+</section>
+<div class="cell code" id="PvcAl_r-0KzL">
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install  <span class="op">-</span>q streamlit</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install  <span class="op">-</span>q pyngrok</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install  <span class="op">-</span>q streamlit_ace</span></code></pre></div>
+</div>
+<section id="run-ngrok" class="cell markdown" id="Kfn_WA3Lu6ZM">
+<h3>run NGROK</h3>
+</section>
+<div class="cell code" id="oi8WRP66XJkR">
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ngrok authtoken <span class="dv">2</span><span class="er">U0tcpeeWlOKDBRQnQVcSnKF8tD_2J3FYquFYDGs6CSB7vhuW</span></span></code></pre></div>
+</div>
+<div class="cell code" id="kpchG6y4XXjK">
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile app.py</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickel</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># load the trained model</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>pickel_in <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;PredictionModel.pkl&#39;</span>, <span class="st">&#39;rb&#39;</span>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>classifier <span class="op">=</span> pickel.load(pickel_in)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache</span>()</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="co"># define the functionwhich will make the prediction usinfg the data which the user input</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prediction(Gender, Married, ApplicantIncome, LoanAmount, Credit_History):</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#pre-processing user inuut</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> Gender <span class="op">==</span> <span class="st">&#39;Male&#39;</span>:</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    Gender <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    Gender <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> Married <span class="op">==</span> <span class="st">&#39;Unmarried&#39;</span>:</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    Married <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>    Married <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> Credit_History <span class="op">==</span> <span class="st">&#39;Unclear Debts&#39;</span>:</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>    Credit_History <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>    Credit_History <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>  LoanAmount <span class="op">=</span> LoanAmount<span class="op">/</span><span class="dv">1000</span></span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Now Making Prediction</span></span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>  prediction <span class="op">=</span> classifier.predict([[Gender, Married, ApplicantIncome, LoanAmount, Credit_History]])</span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> prediction <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a>    pred <span class="op">=</span> <span class="st">&#39;Rejected&#39;</span></span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a>    pred <span class="op">==</span> <span class="st">&#39;Approved&#39;</span></span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> pred</span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Main Function in which we define our web-page ——————</span></span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main:</span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Front-End elements</span></span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a>  html_temp <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div style = &quot;background-color&quot;:yellow; padding:13px&gt;</span></span>
+<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;h1 style = &quot;color:black; text-align:center;&quot;&gt;Automated Lone Predection System&lt;h1&gt;</span></span>
+<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/div&gt;</span></span>
+<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a><span class="st">  &quot;&quot;&quot;</span></span>
+<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Display the Front-End aspect</span></span>
+<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a>  st.markdown(html_temp, unsafe_allow_html<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create boxes in which user can enter data required to make prediction</span></span>
+<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a>  Gender <span class="op">=</span> st.selectbox(<span class="st">&#39;Gender&#39;</span>, (<span class="st">&#39;Male&#39;</span>, <span class="st">&#39;Female&#39;</span>))</span>
+<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a>  Married <span class="op">=</span> st.selectbox(<span class="st">&#39;MArital Status&#39;</span>, (<span class="st">&#39;Unmarried&#39;</span>, <span class="st">&#39;Married&#39;</span>))</span>
+<span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a>  ApplicantIncome <span class="op">=</span> st.number_input(<span class="st">&#39;Applicant Monthly Income&#39;</span>)</span>
+<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a>  LoanAmount <span class="op">=</span> st.number_input(<span class="st">&#39;Total Loan Amount&#39;</span>)</span>
+<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a>  Credit_History <span class="op">=</span> st.selectbox(<span class="st">&#39;Credit_History&#39;</span>, (<span class="st">&#39;Unclear Debts&#39;</span>, <span class="st">&#39;No Unclear Debts&#39;</span>))</span>
+<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a>  result <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a>  <span class="co"># When the &quot;predict&quot; is clicked, make the prediction and store it</span></span>
+<span id="cb40-63"><a href="#cb40-63" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> st.btton(<span class="st">&quot;Predict&quot;</span>):</span>
+<span id="cb40-64"><a href="#cb40-64" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> prediction(Gender, Married, ApplicantIncome, LoanAmount, Credit_History)</span>
+<span id="cb40-65"><a href="#cb40-65" aria-hidden="true" tabindex="-1"></a>    st.success(<span class="st">&#39;Your Loan is </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(result))</span>
+<span id="cb40-66"><a href="#cb40-66" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(LoanAmount)</span>
+<span id="cb40-67"><a href="#cb40-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-69"><a href="#cb40-69" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span><span class="op">==</span><span class="st">&#39;__main__&#39;</span>:</span>
+<span id="cb40-70"><a href="#cb40-70" aria-hidden="true" tabindex="-1"></a>  main()</span></code></pre></div>
+</div>
+<div class="cell markdown" id="AZxvR9Bwfhdr">
+<p>This is the default server where the STREAMLIT MODEL will get
+deployed</p>
+</div>
+<div class="cell code" id="MC_EGntbfx4G">
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>nohup streamlit run <span class="op">--</span>server.port <span class="dv">80</span> app.py <span class="op">&amp;</span></span></code></pre></div>
+</div>
+<div class="cell markdown" id="lF_AxywKgn1K">
+<p>Get the URL</p>
+</div>
+<div class="cell code" id="ZHkuc-AQgFru">
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyngrok <span class="im">import</span> ngrok</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> ngrok.<span class="ex">connect</span>(port <span class="op">=</span> <span class="dv">8080</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>url</span></code></pre></div>
+</div>
+<section id="quit-ngrok" class="cell markdown" id="bb6n6rjivB1D">
+<h2>quit ngrok</h2>
+</section>
+<div class="cell code" id="cP3dvOCugcHL">
+<div class="sourceCode" id="cb43"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>ngrok.kill()</span></code></pre></div>
+</div>
+<section id="new-section" class="cell markdown" id="0d_K5TQ-1Lcm">
+
+
+<!-- <h1>New Section</h1>
+</section>
+<div class="cell code" data-execution_count="71"
+data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+data-executionInfo="{&quot;elapsed&quot;:6005,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1693138146358,&quot;user&quot;:{&quot;displayName&quot;:&quot;Pritam Bose&quot;,&quot;userId&quot;:&quot;02122891975072042438&quot;},&quot;user_tz&quot;:-330}"
+id="9Nb0JR3y1M9_" data-outputId="969ebe72-abd7-4258-f8e0-4ab0d702459d">
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>jupyter nbconvert <span class="op">--</span>to html Automating\ loan\ prediction.ipynb</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>[NbConvertApp] Converting notebook Automating loan prediction.ipynb to html
+Traceback (most recent call last):
+  File &quot;/usr/local/bin/jupyter-nbconvert&quot;, line 8, in &lt;module&gt;
+    sys.exit(main())
+  File &quot;/usr/local/lib/python3.10/dist-packages/jupyter_core/application.py&quot;, line 285, in launch_instance
+    return super().launch_instance(argv=argv, **kwargs)
+  File &quot;/usr/local/lib/python3.10/dist-packages/traitlets/config/application.py&quot;, line 992, in launch_instance
+    app.start()
+  File &quot;/usr/local/lib/python3.10/dist-packages/nbconvert/nbconvertapp.py&quot;, line 423, in start
+    self.convert_notebooks()
+  File &quot;/usr/local/lib/python3.10/dist-packages/nbconvert/nbconvertapp.py&quot;, line 597, in convert_notebooks
+    self.convert_single_notebook(notebook_filename)
+  File &quot;/usr/local/lib/python3.10/dist-packages/nbconvert/nbconvertapp.py&quot;, line 560, in convert_single_notebook
+    output, resources = self.export_single_notebook(
+  File &quot;/usr/local/lib/python3.10/dist-packages/nbconvert/nbconvertapp.py&quot;, line 488, in export_single_notebook
+    output, resources = self.exporter.from_filename(
+  File &quot;/usr/local/lib/python3.10/dist-packages/nbconvert/exporters/exporter.py&quot;, line 189, in from_filename
+    return self.from_file(f, resources=resources, **kw)
+  File &quot;/usr/local/lib/python3.10/dist-packages/nbconvert/exporters/exporter.py&quot;, line 206, in from_file
+    return self.from_notebook_node(
+  File &quot;/usr/local/lib/python3.10/dist-packages/nbconvert/exporters/html.py&quot;, line 223, in from_notebook_node
+    return super().from_notebook_node(nb, resources, **kw)
+  File &quot;/usr/local/lib/python3.10/dist-packages/nbconvert/exporters/templateexporter.py&quot;, line 413, in from_notebook_node
+    output = self.template.render(nb=nb_copy, resources=resources)
+  File &quot;/usr/local/lib/python3.10/dist-packages/jinja2/environment.py&quot;, line 1301, in render
+    self.environment.handle_exception()
+  File &quot;/usr/local/lib/python3.10/dist-packages/jinja2/environment.py&quot;, line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/lab/index.html.j2&quot;, line 3, in top-level template code
+    {% from &#39;jupyter_widgets.html.j2&#39; import jupyter_widgets %}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/lab/base.html.j2&quot;, line 2, in top-level template code
+    {% from &#39;celltags.j2&#39; import celltags %}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/display_priority.j2&quot;, line 1, in top-level template code
+    {%- extends &#39;base/null.j2&#39; -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/null.j2&quot;, line 26, in top-level template code
+    {%- block body -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/null.j2&quot;, line 29, in block &#39;body&#39;
+    {%- block body_loop -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/null.j2&quot;, line 31, in block &#39;body_loop&#39;
+    {%- block any_cell scoped -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/null.j2&quot;, line 34, in block &#39;any_cell&#39;
+    {%- block codecell scoped -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/lab/base.html.j2&quot;, line 12, in block &#39;codecell&#39;
+    {{ super() }}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/null.j2&quot;, line 44, in block &#39;codecell&#39;
+    {%- block output_group -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/lab/base.html.j2&quot;, line 38, in block &#39;output_group&#39;
+    {{ super() }}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/null.j2&quot;, line 48, in block &#39;output_group&#39;
+    {%- block outputs scoped -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/lab/base.html.j2&quot;, line 44, in block &#39;outputs&#39;
+    {{ super() }}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/null.j2&quot;, line 50, in block &#39;outputs&#39;
+    {%- block output scoped -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/lab/base.html.j2&quot;, line 87, in block &#39;output&#39;
+    {{ super() }}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/null.j2&quot;, line 52, in block &#39;output&#39;
+    {%- block execute_result scoped -%}{%- endblock execute_result -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/lab/base.html.j2&quot;, line 125, in block &#39;execute_result&#39;
+    {% block data_priority scoped %}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/lab/base.html.j2&quot;, line 126, in block &#39;data_priority&#39;
+    {{ super() }}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/base/display_priority.j2&quot;, line 12, in block &#39;data_priority&#39;
+    {%- block data_svg -%}
+  File &quot;/usr/local/share/jupyter/nbconvert/templates/lab/base.html.j2&quot;, line 162, in block &#39;data_svg&#39;
+    {{ output.data[&#39;image/svg+xml&#39;] | clean_html }}
+  File &quot;src/lxml/html/clean.py&quot;, line 561, in lxml.html.clean.Cleaner.clean_html
+  File &quot;/usr/local/lib/python3.10/dist-packages/lxml/html/__init__.py&quot;, line 873, in fromstring
+    doc = document_fromstring(html, parser=parser, base_url=base_url, **kw)
+  File &quot;/usr/local/lib/python3.10/dist-packages/lxml/html/__init__.py&quot;, line 759, in document_fromstring
+    value = etree.fromstring(html, parser, **kw)
+  File &quot;src/lxml/etree.pyx&quot;, line 3257, in lxml.etree.fromstring
+  File &quot;src/lxml/parser.pxi&quot;, line 1911, in lxml.etree._parseMemoryDocument
+ValueError: Unicode strings with encoding declaration are not supported. Please use bytes input or XML fragments without declaration. -->
+</code></pre>
+</div>
+</div>
+</body>
+</html>
