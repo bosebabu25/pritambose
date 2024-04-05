@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="P-icon.png" sizes="22*22">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>My C.V</title>
+    <script>     // ================PREVENT RIGHT CLICK================
+    document.addEventListener("contextmenu", function(evt){
+      evt.preventDefault();
+    });
+  </script>
+
+  <!-- TO PREVENT COPY TEXT, USE ANY ONE OF THESE TWO METHODS ———› EITHER JS OR CSS-->
+
+  <script>  // PREVENT FROM COPY
+    document.addEventListener("copy", function(evt){
+      // prevent CLIPBOARD TEXT
+      evt.clipboardData.setData("text/plain", "Alart!!");
+      // PREVENT DEFAULT COPY
+      evt.preventDefault();
+    })
+  </script>
+
+  <!-- PREVENT FROM COPY -->
+  <style>
+    *{
+      user-select: none;
+    }
+  </style>
+  <!-- ENND PREVENT COPY -->
+  </head>
+
+  <body oncontextmenu="return false">
+    <section class="cv" style="padding: 5%;">   
+    <table>
+        <tr>
+            <td><center><h1>CURRICULUM VITAE</h1></center></td>
+        </tr>
+        <tr>
+            <td><center><h2 style="color: blue;"><u>Pritam Bose</u></h2></center></td>
+            <!-- <td><img src="cv.jpg" height="250" width="200"></td> -->
+        </tr>
+        <tr>
+            <td><b>➢ </b><strong style="color:blue;"><i><u> Qualification</u></i> :</strong> B.Tech<br>
+                <b>➢ </b><strong style="color:blue;"><i><u> Discipline</u></i> :</strong> Computer Science & Engineering<br>
+                <b>➢ </b><strong style="color:blue;"><i><u> Institution</u></i> :</strong> Calcutta Institute of Engineering & Management<br>
+                <!-- <b>➢ </b><strong style="color:blue;"><i><u> Date of Birth</u></i> :</strong> 4th December, 1999<br> -->
+                <b>➢ </b><strong style="color:blue;"><i><u> Gender</u></i> :</strong> Male<br>
+                <b>➢ </b><strong style="color:blue;"><i><u> Blood group</u></i> :</strong> A+<br>
+                <b>➢ </b><strong style="color:blue;"><i><u> Marital status</u></i> :</strong> Unmarried<br>
+                <b>➢ </b><strong style="color:blue;"><i><u> Address</u></i> :</strong> 343/1 Lenin Sarani, New Barrackpore Purbachal, Kolkata:700131<br>
+                <b>➢ </b><strong style="color:blue;"><i><u> Contact No</u></i> :</strong>  8420752479 <b>/</b> 7980700150<br>
+                <b>➢ </b><strong style="color:blue;"><i><u> e-mail id</u></i> :</strong> bosebabu25@gmail.com<br>
+                <b>➢ </b><strong style="color:blue;"><i><u> My website link</u></i> : </strong><a href="index.html">bosebabu25.github.io/pritambose</a><br>
+            </td>
+            <td><img src="../assets/img/resume.jpg" height="300" width="200"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pritam Bose</p></td>
+        </tr>
+        <tr>
+            <td><br><b>➢ </b><strong style="color:blue"><i><u>Career Objectives</u> :</i></strong><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;To rise in the corporate world with determination, lead the team-mate in
+                the right direction and achieve organizational goal.<br></td>
+        </tr>
+    </table>
+
+    <!-- B -->
+    <table>
+      <tr>
+        <td><br><b>➢ </b><strong style="color:blue"><i><u>Academic Qualification:</u> :</i></strong><br></td>
+      </tr>
+    </table>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Certificate</th>
+            <th scope="col">Degree</th>
+            <th scope="col">Discipline</th>
+            <th scope="col">Institute</th>
+            <th scope="col">Board / University</th>
+            <th scope="col">Year of passing</th>
+            <th scope="col">Aggregate (%) or DGPA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Diploma</th>
+            <td>B.Tech</td>
+            <td>Computer Science & Technology</td>
+            <td>Calcutta Institute of Science & Technology</td>
+            <td>MAKAUT</td>
+            <td>persuing</td>
+            <td>8.3 (still now)</td>
+          </tr>
+          <tr>
+            <th scope="row">Diploma</th>
+            <td>Diploma</td>
+            <td>Computer Science & Technology</td>
+            <td>Regent Institute of Science & Technology</td>
+            <td>WBSCTE</td>
+            <td>2021</td>
+            <td>80.80%</td>
+          </tr>
+          <tr>
+            <th scope="row">12th</th>
+            <td>H.S</td>
+            <td>Pure Science</td>
+            <td>Kodalia Agapur High School</td>
+            <td>WBCHSE</td>
+            <td>2018</td>
+            <td>59.8%</td>
+          </tr>
+          <tr>
+            <th scope="row">10th</th>
+            <td>Madhyamik</td>
+            <td>All Subject</td>
+            <td>New Barrackpur Colony Boy's High School</td>
+            <td>WBBSE</td>
+            <td>2016</td>
+            <td>73.85%</td>
+          </tr>
+        </tbody>
+      </table><br><br>
+      <!-- <hr style="width: 80%;margin-left: 10%;"> -->
+      <!-- End -->
+
+      <table>
+          <tr>
+              <td><b>➢</b><strong style="color:blue;"><i><u>Subject of interest</u> :</i></strong><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; • Object Oriented Programming<br>
+                &nbsp; &nbsp; &nbsp; &nbsp; • Networking</td>
+          </tr>
+          <tr>
+              <td><b>➢</b><strong style="color:blue;"><i><u>Computer Proficiency</u> :</i></strong><br>
+                &nbsp; &nbsp; &nbsp; &nbsp;• <b>OS known: </b>Mac, Windows & Linux<br>
+                &nbsp; &nbsp; &nbsp; &nbsp;• Computer Fundamentals, MS Office<br>
+                &nbsp; &nbsp; &nbsp; &nbsp;• Photo Editing<br>
+                &nbsp; &nbsp; &nbsp; &nbsp;• Video Editing</td>
+          </tr>
+          <tr>
+              <td><b>➢</b><strong style="color:blue;"><i><u>Hobby</u> :</i></strong><br>
+                 &nbsp; &nbsp; &nbsp; &nbsp;• Watching movies<br>
+                 &nbsp; &nbsp; &nbsp; &nbsp;• Playing cricket</td>
+          </tr>
+          <tr>
+              <td><b>➢</b><strong style="color:blue;"><i><u>Passion</u> :</i></strong><br>
+                &nbsp; &nbsp; &nbsp; &nbsp;• Data Analysis, Data Science<br>
+                &nbsp; &nbsp; &nbsp; &nbsp;• Java, Python, C, C++</td>
+          </tr>
+          <tr>
+              <td><b>➢</b><strong style="color:blue;"><i><u>Languages known</u> :</i></strong><br>
+                 &nbsp; &nbsp; &nbsp; &nbsp;• Bengali &nbsp; &nbsp; Read, write & speak<br>
+                 &nbsp; &nbsp; &nbsp; &nbsp;• English &nbsp; &nbsp; Read, write & speak<br>
+                 &nbsp; &nbsp; &nbsp; &nbsp;• Hindi &nbsp; &nbsp; &nbsp; &nbsp;Speak only</td>
+          </tr>
+          <tr>
+              <td><b>➢</b><strong style="color:blue;"><i><u>Additional Information</u> :</i></strong><br>
+                &nbsp; &nbsp; &nbsp; &nbsp;• Passionate, professional, friendly, trustworthy, punctual & disciplined</td>
+          </tr>
+      </table><br>
+      <!-- <br><hr style="width: 70%; margin-left: 15%;" />&nbsp;<br> -->
+
+      <table class="table">
+        <!-- <thead> -->
+          <!-- <tr> -->
+            <th scope="col" >Date:_______________</th>
+            <th scope="col">Signature______________</th>
+          <!-- </tr> -->
+        <!-- </thead> -->
+      </table>
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+  </section>
+   
+  </body>
+</html>
