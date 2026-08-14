@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- ============================================ -->
+  <!-- 🔍 SEO & SOCIAL META TAGS -->
+  <!-- ============================================ -->
+  <title>Pritam Bose 😎 | B.Tech Computer Science & Data Analytics | CIEM</title>
+  <meta name="title" content="Pritam Bose | B.Tech Computer Science Graduate & Data Visualisation Expert">
+  <meta name="description" content="Official portfolio of Pritam Bose - B.Tech Computer Science graduate from CIEM (2024). Specializing in Data Analysis, Power BI, Python, SQL, and Dashboard Visualisation. Explore projects, credentials, and degree certificates.">
+  <meta name="keywords" content="Pritam Bose, Data Analyst, Data Visualisation, PowerBI, Python, MySQL, CIEM, Kolkata, Computer Science Graduate, Portfolio">
+  <meta name="author" content="Pritam Bose">
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="jzcsn2jMWzAUrT4SHxxNuLbx-mpoLIPL0R2NWdXO3dA" />
+  
+  <!-- Schema.org JSON-LD Structured Data for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Pritam Bose",
+    "jobTitle": "Data Analyst & Computer Science Engineer",
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Calcutta Institute of Engineering and Management (CIEM)"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Regent Institute of Science and Technology (RIST)"
+      }
+    ],
+    "knowsAbout": ["Data Analysis", "Power BI", "Data Visualisation", "Python", "SQL", "Java", "Advanced Excel"],
+    "email": "pritambosepritam@gmail.com",
+    "telephone": "+91 7980700150"
+  }
+  </script>
+
+  <link rel="icon" type="image/png" href="Logo.png">
+  <script src="/_sdk/element_sdk.js"></script>
+
+  <!-- ============================================ --> 
+  <!-- 🎨 CSS SECTION - CLEAN BACKGROUND & RGB TEXT --> 
+  <!-- ============================================ -->
+  <style>
+        :root {
+            /* Ultra-simple, eye-pleasing light background colors */
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.98);
+            --shadow-light: rgba(15, 23, 42, 0.04);
+            /* Vivid RGB spectrum ONLY for foreground text */
+            --rgb-gradient: linear-gradient(90deg, #e11d48, #ea580c, #16a34a, #0284c7, #7c3aed, #db2777, #e11d48);
+            /* Soft gradient for borders and buttons */
+            --pleasant-gradient: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { height: 100%; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-color);
+            min-height: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Calm Scrollbar */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--pleasant-gradient);
+            border-radius: 10px;
+        }
+
+        /* ============================================ */
+        /* 🌈 RGB TEXT ANIMATIONS (KEPT ON TEXT ONLY) */
+        /* ============================================ */
+        @keyframes flowRGB {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes colorCycle {
+            0% { color: #e11d48; }
+            16% { color: #ea580c; }
+            33% { color: #16a34a; }
+            50% { color: #0284c7; }
+            66% { color: #7c3aed; }
+            83% { color: #db2777; }
+            100% { color: #e11d48; }
+        }
+
+        /* RGB Gradient on Headings */
+        h1, h2, h3, .section-title, .item-title, .item-company, .cert-info h3, #jobTitle, .kpi-number {
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: flowRGB 4s linear infinite;
+            font-weight: 900;
+        }
+
+        /* RGB Color Cycle on Body Text */
+        p, span, .item-description, .about-text, .tagline, .contact-item, label, input, textarea, .cert-info p, .kpi-label {
+            animation: colorCycle 6s linear infinite;
+            font-weight: 600;
+        }
+
+        /* Exclude UI buttons/badges from text cycling so they remain legible */
+        .submit-btn span, .submit-btn svg, .pdf-view-button, .featured-badge, .item-date, .nav-btn {
+            animation: none !important;
+            color: inherit !important;
+            -webkit-background-clip: initial !important;
+        }
+
+        /* ============================================ */
+        /* 🎨 SOFT PASTEL AURORA BACKGROUND */
+        /* ============================================ */
+        .animated-bg {
+            position: fixed; inset: 0; z-index: 0;
+            background: var(--bg-color);
+            overflow: hidden; pointer-events: none;
+        }
+
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(110px);
+            opacity: 0.4;
+            will-change: transform;
+        }
+        .bg-blob-1 {
+            width: 34rem; height: 34rem; top: -10rem; left: -8rem;
+            background: #38bdf8; /* sky blue */
+            animation: floatBlobA 24s ease-in-out infinite;
+        }
+        .bg-blob-2 {
+            width: 30rem; height: 30rem; top: -8rem; right: -9rem;
+            background: #a78bfa; /* violet */
+            animation: floatBlobB 28s ease-in-out infinite;
+        }
+        .bg-blob-3 {
+            width: 28rem; height: 28rem; bottom: -9rem; left: 12%;
+            background: #f0abfc; /* orchid pink */
+            animation: floatBlobC 26s ease-in-out infinite;
+        }
+        .bg-blob-4 {
+            width: 26rem; height: 26rem; bottom: -8rem; right: 6%;
+            background: #6ee7b7; /* mint */
+            animation: floatBlobA 30s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatBlobA {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(3rem, 2rem) scale(1.08); }
+        }
+        @keyframes floatBlobB {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-2.5rem, 2.5rem) scale(1.05); }
+        }
+        @keyframes floatBlobC {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(2rem, -2rem) scale(1.1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bg-blob { animation: none !important; }
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1600px; width: 96%; margin: 0 auto;
+            padding: 3rem 0; position: relative; z-index: 1;
+        }
+
+        /* Glass Card */
+        .resume-card {
+            background: var(--glass-bg);
+            /* Gradient ring is painted directly as part of the border (border-box),
+               with the card's own white fill clipped to the padding-box on top of it.
+               This can never bleed into the card's interior, regardless of any
+               transform/animation on this element. */
+            background-image: linear-gradient(var(--glass-bg), var(--glass-bg)), var(--pleasant-gradient);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            border: 2px solid transparent;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.05);
+            position: relative;
+            transform: translateY(30px); opacity: 0;
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
+
+        /* Header Section */
+        .header-section {
+            padding: 4.5rem 4rem; position: relative;
+            background: #ffffff;
+            border-top-left-radius: 24px; border-top-right-radius: 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .profile-content { display: flex; gap: 4rem; align-items: center; }
+
+        /* Avatar (Calm glow) */
+        .avatar-wrapper {
+            position: relative; width: 160px; height: 160px; border-radius: 50%;
+            background: var(--pleasant-gradient);
+            padding: 5px; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+            flex-shrink: 0;
+        }
+
+        .profile-avatar {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: var(--surface-color);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem; font-weight: 900; overflow: hidden;
+        }
+
+        .profile-info { flex: 1; }
+        .profile-info h1 { font-size: 3.8rem; letter-spacing: -1px; margin-bottom: 0.2rem; }
+        .job-title { font-size: 1.7rem; margin-bottom: 0.5rem; }
+        .tagline { font-size: 1.2rem; font-style: italic; margin-bottom: 1.25rem; }
+
+        .analytics-metrics-strip { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .metric-pill {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #ffffff; border: 1px solid #e2e8f0;
+            padding: 0.4rem 0.9rem; border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02); font-size: 0.85rem; font-weight: 700;
+        }
+        .metric-pill svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+        .contact-info { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .contact-item {
+            display: flex; align-items: center; gap: 0.5rem;
+            padding: 0.6rem 1.2rem; border-radius: 50px;
+            background: #ffffff; border: 1px solid #e2e8f0;
+            font-size: 1rem; transition: 0.3s;
+            box-shadow: 0 2px 8px var(--shadow-light);
+        }
+        .contact-item:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
+
+        /* ============================================ */
+        /* 📂 TAB NAVIGATION */
+        /* ============================================ */
+        .nav-tabs {
+            display: flex; justify-content: center; gap: 1rem;
+            margin: 2.5rem auto; padding: 0.5rem;
+            background: #ffffff;
+            border-radius: 50px; border: 1px solid #e2e8f0;
+            width: fit-content;
+            box-shadow: 0 4px 15px var(--shadow-light);
+        }
+
+        .nav-btn {
+            padding: 0.8rem 2.5rem; border-radius: 50px;
+            border: none; background: transparent;
+            font-weight: 800; font-size: 1.1rem; color: #64748b !important;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+
+        .nav-btn.active {
+            background: var(--pleasant-gradient);
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+        }
+
+        .main-content { padding: 1rem 4rem 4rem 4rem; }
+        
+        .section { margin-top: 3.5rem; margin-bottom: 4rem; }
+        .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+        
+        .section-title::after {
+            content: ''; flex: 1; height: 4px; border-radius: 2px;
+            background: var(--pleasant-gradient); 
+        }
+
+        /* About Text */
+        .about-text {
+            line-height: 1.85; font-size: 1.2rem; background: #ffffff; padding: 2.5rem;
+            border-radius: 16px; border-left: 6px solid #3b82f6;
+            box-shadow: 0 8px 25px var(--shadow-light); transition: 0.3s;
+            border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;
+        }
+        .about-text:hover { transform: translateX(5px); box-shadow: 0 12px 30px rgba(0,0,0,0.06); }
+
+        /* Timeline Items */
+        .timeline-container { position: relative; padding-left: 2rem; border-left: 3px solid #e2e8f0; }
+        .experience-item, .education-item {
+            position: relative; background: #ffffff;
+            padding: 2.5rem; border-radius: 16px; margin-bottom: 2.5rem;
+            border: 1px solid #e2e8f0; transition: 0.4s;
+            box-shadow: 0 5px 20px var(--shadow-light);
+        }
+        
+        .experience-item::before, .education-item::before {
+            content: ''; position: absolute; left: -2.65rem; top: 2.5rem;
+            width: 22px; height: 22px; border-radius: 50%;
+            background: var(--pleasant-gradient); 
+            border: 4px solid #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .experience-item:hover, .education-item:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.06); }
+        
+        .item-company { font-size: 1.25rem; margin-bottom: 1rem; }
+        .item-date {
+            position: absolute; right: 2rem; top: 2.5rem; font-size: 0.95rem; font-weight: 700;
+            background: var(--pleasant-gradient); color: white !important;
+            padding: 8px 18px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .item-description { font-size: 1.15rem; line-height: 1.8; margin-top: 1rem;}
+
+        /* Skills */
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem; }
+        .skill-tag {
+            padding: 1rem 1.8rem; border-radius: 12px;
+            background: #ffffff; border: 2px solid #e2e8f0;
+            font-size: 1.1rem; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 4px 10px var(--shadow-light);
+            position: relative;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15);
+        }
+
+        .skill-emoji {
+            display: inline-block;
+            margin-right: 0.5rem;
+            font-size: 1.15em;
+            transition: transform 0.3s ease;
+        }
+        .skill-tag:hover .skill-emoji { transform: scale(1.25) rotate(-8deg); }
+
+        /* Playful hover tooltip - each skill gets its own one-liner */
+        .skill-tag[data-tip]::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            width: max-content; max-width: 220px;
+            transform: translateX(-50%) translateY(6px);
+            background: #0f172a;
+            color: #ffffff !important;
+            padding: 0.6rem 0.9rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.35;
+            white-space: normal;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+            z-index: 30;
+        }
+        .skill-tag[data-tip]::before {
+            content: "";
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            border: 6px solid transparent;
+            border-top-color: #0f172a;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 30;
+        }
+        .skill-tag[data-tip]:hover::after,
+        .skill-tag[data-tip]:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Certificates Gallery */
+        .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 2.5rem; }
+        .certificate-card {
+            background: #ffffff; border-radius: 20px; padding: 1.5rem;
+            border: 1px solid #e2e8f0; transition: 0.4s;
+            box-shadow: 0 8px 20px var(--shadow-light); position: relative;
+        }
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            border-color: #3b82f6;
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+        }
+
+        /* Clean Frame for PDF Previews */
+        .certificate-image-container { 
+            height: 280px; border-radius: 12px; overflow: hidden; position: relative; 
+            margin-bottom: 1.5rem; background: #f8fafc; border: 1px solid #e2e8f0; 
+        }
+        .certificate-pdf { 
+            width: 100%; height: calc(100% + 56px); border: none; margin-top: -56px;
+        }
+        
+        .pdf-view-button {
+            position: absolute; bottom: 1rem; right: 1rem;
+            background: var(--pleasant-gradient); color: white !important;
+            padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-size: 0.95rem; font-weight: 800;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: 0.3s;
+        }
+        .pdf-view-button:hover { transform: scale(1.05); }
+        .cert-info h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+
+        .featured-cert { overflow: hidden; border: 2px solid #0ea5e9; }
+        .featured-badge {
+            position: absolute; top: 30px; right: -40px;
+            background: var(--pleasant-gradient); color: white !important;
+            padding: 8px 45px; font-size: 0.8rem; font-weight: 900;
+            transform: rotate(45deg); z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        /* ============================================ */
+        /* 📬 ENQUIRY FORM */
+        /* ============================================ */
+        .contact-form-container {
+            background: #ffffff; padding: 3rem;
+            border-radius: 24px; border: 1px solid #e2e8f0;
+            position: relative; box-shadow: 0 10px 30px var(--shadow-light);
+        }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+        .input-group { position: relative; }
+        .input-group.full-width { grid-column: 1 / -1; }
+        
+        .form-input {
+            width: 100%; padding: 1.2rem;
+            background: #f8fafc; border: 1px solid #cbd5e1;
+            border-radius: 12px; font-size: 1.05rem;
+            outline: none; transition: 0.3s; font-family: inherit;
+        }
+        .form-input:focus { border-color: #0ea5e9; background: #ffffff; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); }
+        
+        .form-label {
+            position: absolute; left: 1rem; top: 1.2rem;
+            pointer-events: none; transition: 0.3s;
+            background: transparent; padding: 0 0.5rem; font-size: 1rem;
+        }
+        .form-input:focus ~ .form-label, .form-input:not(:placeholder-shown) ~ .form-label {
+            top: -0.6rem; left: 0.8rem; font-size: 0.85rem;
+            background: #ffffff; border-radius: 4px;
+        }
+
+        .submit-btn {
+            background: var(--pleasant-gradient); color: white !important;
+            border: none; padding: 1.2rem 3rem; border-radius: 12px;
+            font-size: 1.15rem; font-weight: 800; cursor: pointer; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 1rem; width: 100%; justify-content: center;
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
+        }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(14, 165, 233, 0.3); }
+        
+        #formMessage { margin-top: 1rem; text-align: center; display: none; padding: 1rem; border-radius: 8px; font-weight: 800;}
+        .success-msg { background: #dcfce7; }
+        .error-msg { background: #fee2e2; }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .profile-content { flex-direction: column; text-align: center; }
+            .analytics-metrics-strip { justify-content: center; }
+            .item-date { position: relative; right: 0; top: 0; display: inline-block; margin-bottom: 1.5rem;}
+            .form-grid { grid-template-columns: 1fr; }
+            .main-content { padding: 1rem 1.5rem 2rem 1.5rem; }
+            .header-section { padding: 3rem 1.5rem; }
+            .container { width: 100%; padding: 1rem 0; }
+            .nav-tabs { flex-direction: column; width: 100%; border-radius: 20px;}
+            .nav-btn { border-radius: 12px; }
+        }
+    </style>
+ </head>
+ <body oncontextmenu="return false">
+
+  <!-- SOFT, LIGHT AURORA BACKGROUND -->
+  <div class="animated-bg">
+   <div class="bg-blob bg-blob-1"></div>
+   <div class="bg-blob bg-blob-2"></div>
+   <div class="bg-blob bg-blob-3"></div>
+   <div class="bg-blob bg-blob-4"></div>
+  </div>
+
+  <main class="container">
+   <div class="resume-card">
+    
+    <!-- HEADER -->
+    <header class="header-section">
+     <div class="profile-content">
+      <div class="avatar-wrapper">
+          <div class="profile-avatar" id="avatar">
+              <div id="avatarText">PB</div>
+          </div>
+      </div>
+      <div class="profile-info">
+       <h1 id="fullName">Pritam Bose</h1>
+       <div class="job-title" id="jobTitle">Computer Science Engineer & Data Visualisation Specialist</div>
+       <div class="tagline" id="tagline">Transforming complex datasets into actionable business intelligence & strategic KPIs</div>
+       
+       <!-- Data Analyst Highlight Badges -->
+       <div class="analytics-metrics-strip">
+           <div class="metric-pill">
+               <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+               <span>PowerBI & Dashboard Design</span>
+           </div>
+           <div class="metric-pill">
+               <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7zm0 5h16M4 12c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3"/></svg>
+               <span>MySQL & Advanced Excel</span>
+           </div>
+           <div class="metric-pill">
+               <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+               <span>B.Tech CSE (8.09 CGPA)</span>
+           </div>
+       </div>
+
+       <div class="contact-info">
+        <div class="contact-item">
+         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg>
+         <span id="email">pritambosepritam@gmail.com</span>
+        </div>
+        <div class="contact-item">
+         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" /></svg>
+         <span id="phone">+91 7980700150</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+
+    <div class="main-content">
+        
+     <!-- ============================================ -->
+     <!-- 📂 TAB NAVIGATION -->
+     <!-- ============================================ -->
+     <div class="nav-tabs reveal">
+         <button class="nav-btn active" onclick="switchTab('overview')">Profile Overview</button>
+         <button class="nav-btn" onclick="switchTab('certificates')">Certificate Gallery</button>
+     </div>
+
+     <!-- ============================================ -->
+     <!-- 👁️ VIEW 1: OVERVIEW (PROFILE & EXPERIENCE) -->
+     <!-- ============================================ -->
+     <div id="view-overview">
+         <!-- ABOUT ME -->
+         <section class="section reveal">
+          <h2 class="section-title">📝 About Me</h2>
+          <p class="about-text" id="aboutText">Hi 👋 <br> My name is Pritam Bose, and I'm a B.tech Computer Science Graduate from CIEM Tollygunge in the year of 2024. I also have done Diploma in Computer Science and Technology from Regent College, in Barrackpore, in the year of 2021. My specialization lies in Data Analysis, Predictive Insights, and KPI Visualization using Power BI, Python, and SQL.</p>
+         </section>
+
+         <!-- SKILLS -->
+         <section class="section reveal">
+          <h2 class="section-title">⚡ Analytics & Technical Expertise</h2>
+          <div id="skillsContainer"></div>
+         </section>
+
+         <!-- WORK EXPERIENCE -->
+         <section class="section reveal">
+          <h2 class="section-title">💼 Projects & Practical Experience</h2>
+          <div class="timeline-container" id="experienceContainer"></div>
+         </section>
+
+         <!-- EDUCATION -->
+         <section class="section reveal">
+          <h2 class="section-title">🎓 Education</h2>
+          <div class="timeline-container" id="educationContainer"></div>
+         </section>
+     </div> <!-- END VIEW 1 -->
+
+     <!-- ============================================ -->
+     <!-- 👁️ VIEW 2: CERTIFICATE GALLERY -->
+     <!-- ============================================ -->
+     <div id="view-certificates" style="display: none;">
+         
+         <section class="section reveal">
+          <h2 class="section-title">📜 Experience Certificates</h2>
+          <div class="certificates-grid" id="experienceCertificates"></div>
+         </section>
+
+         <section class="section reveal">
+          <h2 class="section-title">📚 Education Certificates</h2>
+          <div class="certificates-grid" id="educationCertificates"></div>
+         </section>
+
+         <section class="section reveal">
+          <h2 class="section-title">⭐ Professional Certifications</h2>
+          <div class="certificates-grid" id="professionalCertificates"></div>
+         </section>
+
+     </div> <!-- END VIEW 2 -->
+
+     <!-- ============================================ -->
+     <!-- 📬 ENQUIRY FORM (ALWAYS VISIBLE AT BOTTOM)   -->
+     <!-- ============================================ -->
+     <section class="section reveal" id="contact">
+        <h2 class="section-title">📬 Connect With Me</h2>
+        <div class="contact-form-container">
+            <form id="enquiryForm">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <input type="text" id="formName" name="Name" class="form-input" placeholder=" ">
+                        <label for="formName" class="form-label">Full Name (Optional)</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="formEmail" name="Email" class="form-input" placeholder=" ">
+                        <label for="formEmail" class="form-label">Email ID (Optional)</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" id="formPhone" name="Phone" class="form-input" placeholder=" ">
+                        <label for="formPhone" class="form-label">Phone Number (Optional)</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="formPosition" name="Position" class="form-input" placeholder=" ">
+                        <label for="formPosition" class="form-label">Position / Company (Optional)</label>
+                    </div>
+                    <div class="input-group full-width">
+                        <textarea id="formPurpose" name="Purpose" class="form-input" rows="4" placeholder=" " required></textarea>
+                        <label for="formPurpose" class="form-label">Purpose of Enquiry (Required) *</label>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span>Send Enquiry</span>
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+                <div id="formMessage"></div>
+            </form>
+        </div>
+     </section>
+
+    </div>
+   </div>
+  </main>
+
+  <!-- ============================================ --> 
+  <!-- ⚙️ JAVASCRIPT SECTION --> 
+  <!-- ============================================ -->
+  <script>
+        // ============================================
+        // 🔀 TAB SWITCHING LOGIC
+        // ============================================
+        function switchTab(tabId) {
+            document.getElementById('view-overview').style.display = 'none';
+            document.getElementById('view-certificates').style.display = 'none';
+            
+            const btns = document.querySelectorAll('.nav-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(`view-${tabId}`).style.display = 'block';
+            event.currentTarget.classList.add('active');
+            
+            setTimeout(() => {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            }, 50);
+            
+            window.scrollTo({ top: document.querySelector('.nav-tabs').offsetTop - 50, behavior: 'smooth' });
+        }
+
+        // ============================================
+        // ⚠️ GOOGLE SHEETS WEB APP URL
+        // ============================================
+        const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE"; 
+
+        // ============================================
+        // 🔧 DATA
+        // ============================================
+        const skillsData = [
+            { category: "Data Analysis & Visualisation", skills: [
+                { name: "Data Analysis", emoji: "🔍", quip: "Turning messy data into 'aha!' moments" },
+                { name: "Data Visualisation", emoji: "📊", quip: "Making spreadsheets Instagram-worthy" },
+                { name: "PivotTable Analysis", emoji: "🌀", quip: "Pivot now, panic later" },
+                { name: "MS PowerBI", emoji: "⚡", quip: "Dashboards so clean they spark joy" },
+                { name: "Google Data Studio", emoji: "📈", quip: "Charts my manager actually understands" }
+            ]},
+            { category: "Design Tools & Prototyping", skills: [
+                { name: "Canva", emoji: "🎨", quip: "Drag, drop, ship it" },
+                { name: "MS Designer", emoji: "🖌️", quip: "AI does the heavy lifting, I take the bow" },
+                { name: "Figma", emoji: "🧩", quip: "Pixel-perfect, most days" },
+                { name: "Adobe Express", emoji: "✨", quip: "Photoshop's speedy little sibling" }
+            ]},
+            { category: "Database & Query Tools", skills: [
+                { name: "MySQL", emoji: "🗄️", quip: "SELECT * FROM skills WHERE cool = true;" },
+                { name: "Advanced Excel", emoji: "📐", quip: "VLOOKUP is basically my love language" }
+            ]},
+            { category: "Programming Languages", skills: [
+                { name: "Java", emoji: "☕", quip: "Write once, debug forever" },
+                { name: "Python", emoji: "🐍", quip: "import happiness" }
+            ]}
+        ];
+
+        const workExperiences = [
+            { title: "INTERNSHIP —— Data Science & Data Analysis Project", company: "360DigitMg", date: "Apr - 2024", description: "Medical Inventory Optimisation<br><br>👉 Business Objective: Minimize bounce rate.<br>👉 Business Constraint: Minimize inventory cost<br>👉 Success Criteria: Reduce bounce rate by at least 30%. Increase revenue by at least 20 lacs INR." },
+            { title: "Advanced Software Engineering Job Simulation", company: "Wallmart Global Tech", date: "Mar - 2026", description: "👉 Solved difficult technical projects for a variety of teams at Walmart. <br> 👉 Developed a novel version of a heap data structure in Java. <br> 👉 Designed a UML class diagram for a data processor. <br> 👉 Created an entity relationship diagram to design a new database." },
+            { title: "PowerBI Data Visualisation", company: "PwC", date: "Jun - 2024", description: "👉 Demonstrated expertise in data visualization through the creation of Power BI dashboards that effectively conveyed KPIs. <br>👉 Examined HR data, particularly focusing on gender-related KPIs, and identified root causes for gender balance issues." },
+            { title: "Excel Skills Job", company: "JPMorgan Chase & Co.", date: "Nov - 2023", description: "👉 Data cleansing, manipulation, and conditional formatting techniques. <br>👉 Acquired proficiency in automation by learning to record macros and script in Visual Basic for Applications (VBA). <br>👉 Created impactful charts and interactive dashboards." },
+            { title: "Data Visualisation: Empowering Business with Effective Insights", company: "TCS", date: "Oct - 2023", description: "👉 Completed a simulation involving creating data visualizations for Tata Consultancy Services. <br>👉 Prepared questions for a meeting with client senior leadership. <br>👉 Created visuals for data analysis to help executives with effective decision making." }
+        ];
+
+        const educationList = [
+            { title: "Bachelor of Computer Science & Engineering", company: "Calcutta Institute of Engineering And Management (CIEM)", date: "2021 - 2024", description: "Specialized in Data Analysis & Visualisation. CGPA - 8.09" },
+            { title: "Diploma in Computer Science & Technology", company: "Regent Institute of Science and Technology (RIST)", date: "2018 - 2021", description: "Professional Diploma in Computer Technology. Obtained 80% in course work" }
+        ];
+
+        const experienceCertificates = [
+            { title: "INTERNSHIP —— Data Science & Data Analysis Project", issuer: "360DigitMg", date: "Apr - 2024", pdfUrl: "https://drive.google.com/file/d/1OJKzOSAlEFjUyHv9ESYWuaLvSOp7-QZf/view?usp=sharing" },
+            { title: "Advanced Software Engineering Job Simulation", issuer: "Wallmart Global Tech", date: "Mar - 2025", pdfUrl: "https://drive.google.com/file/d/1KcQ8UaEXrylyn4ngViGGZHHbpvRFtAWJ/view?usp=sharing" },
+            { title: "PowerBI Data Visualisation", issuer: "PwC", date: "Jun - 2024", pdfUrl: "https://drive.google.com/file/d/1cntBUENKWTincb2GFT1un20cXl6BbW21/view?usp=sharing" },
+            { title: "Excel Skills Job", issuer: "JPMorgan Chase & Co.", date: "Nov - 2023", pdfUrl: "https://drive.google.com/file/d/11fRExxEG9HcqsWsU5tsqswrPpEIOxD9A/view?usp=sharing" },
+            { title: "Data Visualisation: Empowering Business", issuer: "TCS", date: "Oct - 2023", pdfUrl: "https://drive.google.com/file/d/1lKF9XNN9IE-aCaEQeoe-JeFgW6EEI33U/view?usp=sharing" }
+        ];
+
+        const educationCertificates = [
+            { title: "Final Degree: Bachelor of Computer Science", issuer: "Calcutta Institute of Engineering And Management (CIEM)", date: "2024", pdfUrl: "https://drive.google.com/file/d/1RiaRme-ZL9KhFhvxPWVp7ttpn0jjKBAY/view?usp=sharing", featured: true },
+            { title: "Bachelor of Computer Science", issuer: "CIEM", date: "2024", pdfUrl: "https://drive.google.com/file/d/18ERRGWYzRdNMqywHZNRloo_7EYI-1rwH/view?usp=sharing" },
+            { title: "Certificate Validity of Bachelor of CS", issuer: "CIEM", date: "2024", pdfUrl: "https://drive.google.com/file/d/1w7150ddwNuyPW-wWATHZljecyUKNnmN9/view?usp=sharing" },
+            { title: "Bachelor of Computer Science (Provisional)", issuer: "CIEM", date: "2024", pdfUrl: "https://drive.google.com/file/d/17L31rUhyuZTuLXdXzLi_6rT6YHLBltv6/view?usp=sharing" },
+            { title: "Diploma in Computer Science & Technology", issuer: "RIST", date: "2021", pdfUrl: "https://drive.google.com/file/d/1dWgDxfECusXOCBJJfnrJ5XsHnUkTJyKy/view?usp=drive_link" }
+        ];
+
+        const professionalCertificates = [
+            { title: "Career Essentials in Data Analysis", issuer: "Microsoft and LinkedIn", date: "Jul - 2024", pdfUrl: "https://drive.google.com/file/d/1eiKpRJcwr316lgypaqUtyVkSG4g-cMLt/view?usp=sharing" },
+            { title: "Cyber Suraksha", issuer: "Microsoft", date: "Jan - 2024", pdfUrl: "https://drive.google.com/file/d/1lX7oY-VwVfYG_FSG0IkubRqwtjaQn3wI/view?usp=sharing" },
+            { title: "Master in Microsoft Power BI Desktop", issuer: "Udemy", date: "Oct - 2023", pdfUrl: "https://drive.google.com/file/d/1wyfjIpp76KiyNmt8C-CsPittp4pKP0ID/view?usp=sharing" },
+            { title: "Geoprocessing using Python", issuer: "IIRS", date: "Aug - 2023", pdfUrl: "https://drive.google.com/file/d/1D83JORXTVZwK68OuPDq726GJSg1Zc_tV/view?usp=sharing" },
+            { title: "Data Science with Python", issuer: "Skillup", date: "Dec - 2022", pdfUrl: "https://drive.google.com/file/d/1j5a-Tazmhkhnto0neyjX5OjYpuBxsHLJ/view?usp=sharing" },
+            { title: "Machine Learning from Basics to Advance", issuer: "Udemy", date: "Nov - 2023", pdfUrl: "https://drive.google.com/file/d/1DGeU9AqTJ0Un8JZsnBZ9ZmhMxsQ7gegW/view?usp=sharing" },
+            { title: "Python Beyond the Basic and Intermediate", issuer: "Udemy", date: "Jul - 2022", pdfUrl: "https://drive.google.com/file/d/1yBMTj6usQAWZv4yiUfsq6PUbZCQpPKdd/view?usp=sharing" },
+            { title: "Coding with Java from scratch", issuer: "Udemy", date: "Jun - 2022", pdfUrl: "https://drive.google.com/file/d/11OUFSz3ZI_7f7Uj-Vo_s96C2AO05xaXW/view?usp=sharing" },
+            { title: "Cyber Security Awareness Program NIIELIT", issuer: "NIELIT", date: "Mar - 2024", pdfUrl: "https://drive.google.com/file/d/13FjnbjsUkztLBBnGm8V9EPVwk3qEnWc0/view?usp=sharing" },
+            { title: "Professional Diploma In Software Testing", issuer: "MTF Institute", date: "Sept - 2025", pdfUrl: "https://drive.google.com/file/d/1MVBZzCZ7P9NPJX0hEKZ7mhkvpRmvJbUu/view?usp=sharing" }
+        ];
+
+        function convertToEmbedUrl(pdfUrl) {
+            if (!pdfUrl) return '';
+            const match = pdfUrl.match(/\/d\/([^/]+)/);
+            return match ? `https://drive.google.com/file/d/${match[1]}/preview` : pdfUrl;
+        }
+
+        function renderSkills() {
+            const container = document.getElementById('skillsContainer');
+            skillsData.forEach(cat => {
+                const grid = document.createElement('div'); grid.className = 'skills-grid';
+                cat.skills.forEach(skill => {
+                    const tag = document.createElement('div');
+                    tag.className = 'skill-tag reveal';
+                    tag.setAttribute('data-tip', skill.quip);
+                    tag.innerHTML = `<span class="skill-emoji">${skill.emoji}</span>${skill.name}`;
+                    grid.appendChild(tag);
+                });
+                container.appendChild(grid);
+            });
+        }
+
+        function renderTimeline(data, containerId) {
+            const container = document.getElementById(containerId);
+            data.forEach(item => {
+                container.innerHTML += `
+                    <div class="experience-item reveal">
+                        <div class="item-title">${item.title}</div>
+                        <div class="item-company">${item.company}</div>
+                        <div class="item-date">${item.date}</div>
+                        <div class="item-description">${item.description}</div>
+                    </div>`;
+            });
+        }
+
+        function renderCertificates(data, containerId) {
+            const container = document.getElementById(containerId);
+            data.forEach(cert => {
+                const isFeat = cert.featured ? 'featured-cert' : '';
+                const badge = cert.featured ? '<div class="featured-badge">FINAL DEGREE</div>' : '';
+                container.innerHTML += `
+                    <div class="certificate-card reveal ${isFeat}">
+                        ${badge}
+                        <div class="certificate-image-container">
+                            ${cert.pdfUrl ? `<iframe src="${convertToEmbedUrl(cert.pdfUrl)}" class="certificate-pdf" loading="lazy"></iframe>
+                            <a href="${cert.pdfUrl}" target="_blank" rel="noopener noreferrer" class="pdf-view-button">View PDF</a>` : '<p style="text-align:center; padding:120px 20px; font-weight:800;">PDF Coming Soon</p>'}
+                        </div>
+                        <div class="cert-info">
+                            <h3>${cert.title}</h3>
+                            <p>${cert.issuer} • ${cert.date}</p>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        document.getElementById('enquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const msgBox = document.getElementById('formMessage');
+            const purposeInput = document.getElementById('formPurpose');
+
+            if (!purposeInput.value.trim()) {
+                msgBox.textContent = "Please provide the Purpose of Enquiry before submitting.";
+                msgBox.className = "error-msg";
+                msgBox.style.display = "block";
+                purposeInput.focus();
+                return;
+            }
+            
+            if(GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_SCRIPT_URL_HERE") {
+                msgBox.textContent = "Error: Please connect your Google Script URL in the code.";
+                msgBox.className = "error-msg"; msgBox.style.display = "block";
+                return;
+            }
+
+            btn.innerHTML = '<span>Sending... ↻</span>';
+            btn.disabled = true;
+
+            const formData = new FormData(this);
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' 
+            })
+            .then(() => {
+                msgBox.textContent = "Enquiry Sent Successfully! I will get back to you soon.";
+                msgBox.className = "success-msg";
+                msgBox.style.display = "block";
+                this.reset();
+            })
+            .catch(error => {
+                msgBox.textContent = "Error sending message. Please try again.";
+                msgBox.className = "error-msg";
+                msgBox.style.display = "block";
+            })
+            .finally(() => {
+                btn.innerHTML = '<span>Send Enquiry</span><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>';
+                btn.disabled = false;
+                setTimeout(() => { msgBox.style.display = 'none'; }, 5000);
+            });
+        });
+        
+        renderSkills();
+        renderTimeline(workExperiences, 'experienceContainer');
+        renderTimeline(educationList, 'educationContainer');
+        renderCertificates(experienceCertificates, 'experienceCertificates');
+        renderCertificates(educationCertificates, 'educationCertificates');
+        renderCertificates(professionalCertificates, 'professionalCertificates');
+
+        setTimeout(() => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }, 100);
+    </script>
+ </body>
+</html>
