@@ -95,7 +95,7 @@
         /* DIMMED BACKGROUND ORBS */
         .orb {
             position: absolute; border-radius: 50%; filter: blur(80px); 
-            opacity: 0.05; /* Reduced opacity to dim the background RGB */
+            opacity: 0.05;
             background: var(--rgb-gradient); background-size: 200% auto;
             animation: flowRGB 3s linear infinite, float 15s ease-in-out infinite alternate;
         }
@@ -107,10 +107,10 @@
             100% { transform: translate(50px, 100px) scale(1.2); }
         }
 
-        /* EXPANDED CONTAINER (Less empty space on left/right) */
+        /* EXPANDED CONTAINER */
         .container {
-            max-width: 1600px; /* Increased to allow wider expansion */
-            width: 96%; /* Takes up 96% of the screen width */
+            max-width: 1600px;
+            width: 96%;
             margin: 0 auto;
             padding: 3rem 0; 
             position: relative; z-index: 1;
@@ -256,7 +256,6 @@
             transform: translateY(-10px);
             box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
-        /* RGB Border on hover for certificates */
         .certificate-card::after {
             content: ""; position: absolute; inset: -2px; z-index: -1;
             background: var(--rgb-gradient); background-size: 200% auto;
@@ -276,9 +275,9 @@
         }
         .certificate-pdf { 
             width: 100%; 
-            height: calc(100% + 56px); /* Compensate for the shifted margin */
+            height: calc(100% + 56px);
             border: none; 
-            margin-top: -56px; /* Hides the top 56px toolbar with the pop-out button */
+            margin-top: -56px;
         }
         
         .pdf-view-button {
@@ -437,7 +436,7 @@
      </section>
 
      <!-- ============================================ -->
-     <!-- 📬 ENQUIRY FORM SECTION (WITH NAME FIELD)    -->
+     <!-- 📬 ENQUIRY FORM SECTION (PURPOSE MANDATORY)  -->
      <!-- ============================================ -->
      <section class="section reveal" id="contact">
         <h2 class="section-title">📬 Connect With Me</h2>
@@ -464,10 +463,10 @@
                         <input type="text" id="formPosition" name="Position" class="form-input" placeholder=" ">
                         <label for="formPosition" class="form-label">Position / Company (Optional)</label>
                     </div>
-                    <!-- Purpose (Optional) -->
+                    <!-- Purpose (MANDATORY) -->
                     <div class="input-group full-width">
-                        <textarea id="formPurpose" name="Purpose" class="form-input" rows="4" placeholder=" "></textarea>
-                        <label for="formPurpose" class="form-label">Purpose of Enquiry (Optional)</label>
+                        <textarea id="formPurpose" name="Purpose" class="form-input" rows="4" placeholder=" " required></textarea>
+                        <label for="formPurpose" class="form-label">Purpose of Enquiry (Required) *</label>
                     </div>
                 </div>
                 <button type="submit" class="submit-btn" id="submitBtn">
@@ -525,7 +524,7 @@
         ];
 
         const educationCertificates = [
-            { title: "Final Degree: Bachelor of Computer Science", issuer: "Calcutta Institute of Engineering And Management (CIEM)", date: "2024", pdfUrl: "YOUR_FINAL_DEGREE_PDF_LINK_HERE", featured: true }, // <-- INSERT LINK HERE
+            { title: "Final Degree: Bachelor of Computer Science", issuer: "Calcutta Institute of Engineering And Management (CIEM)", date: "2024", pdfUrl: "YOUR_FINAL_DEGREE_PDF_LINK_HERE", featured: true },
             { title: "Bachelor of Computer Science", issuer: "CIEM", date: "2024", pdfUrl: "https://drive.google.com/file/d/18ERRGWYzRdNMqywHZNRloo_7EYI-1rwH/view?usp=sharing" },
             { title: "Certificate Validity of Bachelor of CS", issuer: "CIEM", date: "2024", pdfUrl: "https://drive.google.com/file/d/1w7150ddwNuyPW-wWATHZljecyUKNnmN9/view?usp=sharing" },
             { title: "Bachelor of Computer Science (Provisional)", issuer: "CIEM", date: "2024", pdfUrl: "https://drive.google.com/file/d/17L31rUhyuZTuLXdXzLi_6rT6YHLBltv6/view?usp=sharing" },
@@ -608,6 +607,16 @@
             
             const btn = document.getElementById('submitBtn');
             const msgBox = document.getElementById('formMessage');
+            const purposeInput = document.getElementById('formPurpose');
+
+            // Mandatory Purpose Check
+            if (!purposeInput.value.trim()) {
+                msgBox.textContent = "Please provide the Purpose of Enquiry before submitting.";
+                msgBox.className = "error-msg";
+                msgBox.style.display = "block";
+                purposeInput.focus();
+                return;
+            }
             
             if(GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_SCRIPT_URL_HERE") {
                 msgBox.textContent = "Error: Please connect your Google Script URL in the code.";
