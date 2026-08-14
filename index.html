@@ -60,16 +60,18 @@
   <script src="/_sdk/element_sdk.js"></script>
 
   <!-- ============================================ --> 
-  <!-- 🎨 CSS SECTION - EYE-PLEASING MULTICOLOR + RGB TEXT --> 
+  <!-- 🎨 CSS SECTION - CALM BLUE-PURPLE THEME + RGB TEXT --> 
   <!-- ============================================ -->
   <style>
         :root {
             --bg-color: #f8fafc;
             --surface-color: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.92);
+            --glass-bg: rgba(255, 255, 255, 0.94);
             --shadow-light: rgba(15, 23, 42, 0.06);
             /* Vivid RGB spectrum for foreground text */
             --rgb-gradient: linear-gradient(90deg, #e11d48, #ea580c, #16a34a, #0284c7, #7c3aed, #db2777, #e11d48);
+            /* Clean Gradient from the provided reference image */
+            --pleasant-gradient: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #6366f1 100%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -102,12 +104,12 @@
         }
 
         @keyframes colorCycle {
-            0% { color: #e11d48; }   /* Deep Red */
-            16% { color: #ea580c; }  /* Deep Orange */
-            33% { color: #16a34a; }  /* Deep Green */
-            50% { color: #0284c7; }  /* Deep Blue */
-            66% { color: #7c3aed; }  /* Purple */
-            83% { color: #db2777; }  /* Magenta */
+            0% { color: #e11d48; }
+            16% { color: #ea580c; }
+            33% { color: #16a34a; }
+            50% { color: #0284c7; }
+            66% { color: #7c3aed; }
+            83% { color: #db2777; }
             100% { color: #e11d48; }
         }
 
@@ -135,40 +137,24 @@
         }
 
         /* ============================================ */
-        /* 🎨 EYE-PLEASING AMBIENT DATA MESH BACKGROUND */
+        /* 🎨 EYE-PLEASING BACKGROUND */
         /* ============================================ */
         .animated-bg {
             position: fixed; inset: 0; z-index: 0;
-            background: linear-gradient(145deg, #f8fafc 0%, #eef2ff 40%, #f0fdf4 70%, #faf5ff 100%);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #eef2ff 100%);
             overflow: hidden; pointer-events: none;
         }
 
-        /* Tech/Analytics Data Grid Layer */
         .data-grid-overlay {
             position: absolute; inset: 0;
             background-image: 
-                linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+                linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
             background-size: 48px 48px;
-            opacity: 0.7;
-        }
-        
-        /* Soothing Ambient Colored Auroras */
-        .ambient-aurora {
-            position: absolute; border-radius: 50%; filter: blur(90px);
-            opacity: 0.45; animation: ambientFloat 18s ease-in-out infinite alternate;
-        }
-        .aurora-1 { width: 550px; height: 550px; background: radial-gradient(circle, #93c5fd, #bfdbfe); top: -8%; left: -5%; }
-        .aurora-2 { width: 500px; height: 500px; background: radial-gradient(circle, #ddd6fe, #fbcfe8); bottom: 10%; right: -5%; animation-delay: -6s; }
-        .aurora-3 { width: 420px; height: 420px; background: radial-gradient(circle, #a7f3d0, #bae6fd); top: 40%; left: 30%; animation-delay: -11s; opacity: 0.35; }
-
-        @keyframes ambientFloat {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(40px, -60px) scale(1.1); }
-            100% { transform: translate(-30px, 40px) scale(0.95); }
+            opacity: 0.8;
         }
 
-        /* CONTAINER (Expanded Width) */
+        /* CONTAINER */
         .container {
             max-width: 1600px;
             width: 96%;
@@ -177,7 +163,7 @@
             position: relative; z-index: 1;
         }
 
-        /* Glowing RGB Glass Card */
+        /* Glass Card */
         .resume-card {
             background: var(--glass-bg);
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
@@ -186,13 +172,7 @@
             position: relative;
             transform: translateY(30px); opacity: 0;
             animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .resume-card::before {
-            content: ""; position: absolute; inset: -4px; z-index: -1;
-            background: var(--rgb-gradient); background-size: 200% auto;
-            animation: flowRGB 3s linear infinite;
-            border-radius: 28px;
+            border: 1px solid rgba(14, 165, 233, 0.2);
         }
 
         @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
@@ -200,18 +180,18 @@
         /* Header Section */
         .header-section {
             padding: 4.5rem 4rem; position: relative;
-            background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(248,250,252,0.95) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240, 249, 255, 0.9) 100%);
             border-top-left-radius: 24px; border-top-right-radius: 24px;
             border-bottom: 1px solid #e2e8f0;
         }
 
         .profile-content { display: flex; gap: 4rem; align-items: center; }
 
-        /* RGB Glowing Avatar */
+        /* Avatar */
         .avatar-wrapper {
             position: relative; width: 160px; height: 160px; border-radius: 50%;
-            background: var(--rgb-gradient); background-size: 200% auto;
-            padding: 5px; animation: flowRGB 3s linear infinite;
+            background: var(--pleasant-gradient);
+            padding: 5px;
             box-shadow: 0 10px 30px rgba(37, 99, 235, 0.25);
             flex-shrink: 0;
         }
@@ -258,18 +238,28 @@
 
         .main-content { padding: 4rem 4rem; }
         
-        .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+        /* INCREASED SECTION GAP */
+        .section {
+            margin-top: 3.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title { 
+            font-size: 2.2rem; 
+            margin-bottom: 2.5rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; 
+        }
         .section-title::after {
             content: ''; flex: 1; height: 4px; border-radius: 2px;
-            background: var(--rgb-gradient); background-size: 200% auto;
-            animation: flowRGB 3s linear infinite;
+            background: var(--pleasant-gradient);
         }
 
         /* About Text */
         .about-text {
             line-height: 1.85; font-size: 1.2rem; background: #ffffff; padding: 2.5rem;
-            border-radius: 16px; border-left: 6px solid transparent;
-            border-image: var(--rgb-gradient) 1;
+            border-radius: 16px; border-left: 6px solid #0ea5e9;
             box-shadow: 0 10px 30px var(--shadow-light); transition: 0.3s;
         }
         .about-text:hover { transform: translateX(5px); box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
@@ -286,16 +276,16 @@
         .experience-item::before, .education-item::before {
             content: ''; position: absolute; left: -2.65rem; top: 2.5rem;
             width: 22px; height: 22px; border-radius: 50%;
-            background: var(--rgb-gradient); background-size: 200% auto;
-            animation: flowRGB 3s linear infinite; border: 4px solid #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            background: var(--pleasant-gradient);
+            border: 4px solid #fff;
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
         }
         .experience-item:hover, .education-item:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
         
         .item-company { font-size: 1.25rem; margin-bottom: 1rem; }
         .item-date {
             position: absolute; right: 2rem; top: 2.5rem; font-size: 0.95rem; font-weight: 700;
-            background: var(--rgb-gradient); background-size: 200% auto; animation: flowRGB 3s linear infinite;
+            background: var(--pleasant-gradient);
             padding: 8px 18px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .item-description { font-size: 1.15rem; line-height: 1.8; margin-top: 1rem;}
@@ -312,8 +302,7 @@
         }
         .skill-tag::before {
             content: ""; position: absolute; inset: -2px; z-index: -1;
-            background: var(--rgb-gradient); background-size: 200% auto;
-            animation: flowRGB 3s linear infinite; border-radius: 14px; opacity: 0; transition: 0.3s;
+            background: var(--pleasant-gradient); border-radius: 14px; opacity: 0; transition: 0.3s;
         }
         .skill-tag:hover { transform: translateY(-5px); }
         .skill-tag:hover::before { opacity: 1; }
@@ -327,14 +316,9 @@
         }
         .certificate-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+            box-shadow: 0 25px 50px rgba(14, 165, 233, 0.15);
+            border-color: #0ea5e9;
         }
-        .certificate-card::after {
-            content: ""; position: absolute; inset: -2px; z-index: -1;
-            background: var(--rgb-gradient); background-size: 200% auto;
-            animation: flowRGB 3s linear infinite; border-radius: 22px; opacity: 0; transition: 0.3s;
-        }
-        .certificate-card:hover::after { opacity: 1; }
 
         /* Clean Frame for PDF Previews */
         .certificate-image-container { 
@@ -355,7 +339,7 @@
         
         .pdf-view-button {
             position: absolute; bottom: 1rem; right: 1rem;
-            background: var(--rgb-gradient); background-size: 200% auto; animation: flowRGB 3s linear infinite;
+            background: var(--pleasant-gradient);
             padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-size: 0.95rem; font-weight: 800;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
         }
@@ -363,16 +347,16 @@
         .cert-info h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
 
         /* Featured Final Degree Highlight */
-        .featured-cert { overflow: hidden; }
+        .featured-cert { overflow: hidden; border-color: #0ea5e9; }
         .featured-badge {
             position: absolute; top: 30px; right: -40px;
-            background: var(--rgb-gradient); background-size: 200% auto; animation: flowRGB 3s linear infinite;
+            background: var(--pleasant-gradient);
             padding: 8px 45px; font-size: 0.8rem; font-weight: 900;
             transform: rotate(45deg); z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         /* ============================================ */
-        /* 📬 RGB ENQUIRY FORM */
+        /* 📬 ENQUIRY FORM */
         /* ============================================ */
         .contact-form-container {
             background: #ffffff; padding: 3rem;
@@ -390,7 +374,7 @@
             border-radius: 12px; font-size: 1.05rem;
             outline: none; transition: 0.3s; font-family: inherit;
         }
-        .form-input:focus { border-color: transparent; background: #ffffff; box-shadow: 0 0 0 2px #3b82f6; }
+        .form-input:focus { border-color: transparent; background: #ffffff; box-shadow: 0 0 0 2px #0ea5e9; }
         
         .form-label {
             position: absolute; left: 1rem; top: 1.2rem;
@@ -403,13 +387,13 @@
         }
 
         .submit-btn {
-            background: var(--rgb-gradient); background-size: 200% auto; animation: flowRGB 3s linear infinite;
+            background: var(--pleasant-gradient);
             border: none; padding: 1.2rem 3rem; border-radius: 12px;
             font-size: 1.15rem; font-weight: 800; cursor: pointer; transition: 0.3s;
             display: inline-flex; align-items: center; gap: 1rem; width: 100%; justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.2);
         }
-        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(14, 165, 233, 0.3); }
         
         #formMessage { margin-top: 1rem; text-align: center; display: none; padding: 1rem; border-radius: 8px; font-weight: 800;}
         .success-msg { background: #dcfce7; }
@@ -431,12 +415,9 @@
  </head>
  <body oncontextmenu="return false">
 
-  <!-- EYE-PLEASING AMBIENT DATA BACKGROUND -->
+  <!-- AMBIENT DATA BACKGROUND -->
   <div class="animated-bg">
       <div class="data-grid-overlay"></div>
-      <div class="ambient-aurora aurora-1"></div>
-      <div class="ambient-aurora aurora-2"></div>
-      <div class="ambient-aurora aurora-3"></div>
   </div>
 
   <main class="container">
@@ -459,15 +440,15 @@
        <!-- Data Analyst Highlight Badges -->
        <div class="analytics-metrics-strip">
            <div class="metric-pill">
-               <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+               <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                <span>PowerBI & Dashboard Design</span>
            </div>
            <div class="metric-pill">
-               <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7zm0 5h16M4 12c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3"/></svg>
+               <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7zm0 5h16M4 12c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3"/></svg>
                <span>MySQL & Advanced Excel</span>
            </div>
            <div class="metric-pill">
-               <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+               <svg viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
                <span>B.Tech CSE (8.09 CGPA)</span>
            </div>
        </div>
@@ -578,15 +559,8 @@
   <!-- ⚙️ JAVASCRIPT SECTION - FULL DATA PRESERVED --> 
   <!-- ============================================ -->
   <script>
-        // ============================================
-        // ⚠️ GOOGLE SHEETS WEB APP URL
-        // Replace this with your Google Apps Script URL
-        // ============================================
         const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE"; 
 
-        // ============================================
-        // 🔧 ALL ORIGINAL DATA RESTORED
-        // ============================================
         const skillsData = [
             { category: "Data Analysis & Visualisation", skills: ["Data Analysis", "Data Visualisation", "PivotTable Analysis", "MS PowerBI", "Google Data Studio"] },
             { category: "Design Tools & Prototyping", skills: ["Canva", "MS Desiginer", "Figma", "Adobe Express"] },
@@ -636,9 +610,6 @@
             { title: "Professional Diploma In Software Testing", issuer: "MTF Institute", date: "Sept - 2025", pdfUrl: "https://drive.google.com/file/d/1MVBZzCZ7P9NPJX0hEKZ7mhkvpRmvJbUu/view?usp=sharing" }
         ];
 
-        // ============================================
-        // 🏗️ RENDER FUNCTIONS
-        // ============================================
         function convertToEmbedUrl(pdfUrl) {
             if (!pdfUrl) return '';
             const match = pdfUrl.match(/\/d\/([^/]+)/);
@@ -691,9 +662,6 @@
             });
         }
 
-        // ============================================
-        // 📬 FORM SUBMISSION LOGIC
-        // ============================================
         document.getElementById('enquiryForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -701,7 +669,6 @@
             const msgBox = document.getElementById('formMessage');
             const purposeInput = document.getElementById('formPurpose');
 
-            // Mandatory Purpose Validation
             if (!purposeInput.value.trim()) {
                 msgBox.textContent = "Please provide the Purpose of Enquiry before submitting.";
                 msgBox.className = "error-msg";
@@ -744,7 +711,6 @@
             });
         });
 
-        // Initialize Everything
         renderSkills();
         renderTimeline(workExperiences, 'experienceContainer');
         renderTimeline(educationList, 'educationContainer');
@@ -752,7 +718,6 @@
         renderCertificates(educationCertificates, 'educationCertificates');
         renderCertificates(professionalCertificates, 'professionalCertificates');
 
-        // Scroll Reveal Initialization
         setTimeout(() => {
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
