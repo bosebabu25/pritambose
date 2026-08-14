@@ -5,15 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="jzcsn2jMWzAUrT4SHxxNuLbx-mpoLIPL0R2NWdXO3dA" />
   <meta name="title" content="PRITAM BOSE | B.TECH COMPUTER SCIENCE GRADUATE | CIEM">
-  <!-- Fixed meta tag typo here -->
   <meta name="description" content="Hi! My name Pritam & I'm a Computer Science Graduate from CIEM college">
   <link rel="icon" type="image/png" href="Logo.png">
   <title>Pritam Bose 😎 | B.TECH COMPUTER SCIENCE GRADUATE | CIEM</title>
-  <script src="/_sdk/element_sdk.js"></script>
-
-  <!-- ============================================ --> 
-  <!-- 🎨 CSS SECTION - ALL STYLING HERE --> 
-  <!-- ============================================ -->
+  <script src="/_sdk/element_sdk.js"></script><!-- ============================================ --> <!-- 🎨 CSS SECTION - ALL STYLING HERE --> <!-- ============================================ -->
   <style>
         /* ========== BASE STYLES ========== */
         * {
@@ -598,39 +593,6 @@
             border-color: #667eea;
         }
 
-        /* ========== FEATURED FINAL DEGREE HIGHLIGHT ========== */
-        .featured-cert {
-            border: 2px solid #fbbf24 !important; /* Premium Gold Border */
-            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.2) !important;
-            transform: translateY(-5px);
-        }
-        
-        .featured-cert::before {
-            background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%) !important;
-        }
-        
-        .featured-cert:hover {
-            box-shadow: 0 25px 60px rgba(251, 191, 36, 0.4) !important;
-            border-color: #f59e0b !important;
-        }
-
-        .featured-badge {
-            position: absolute;
-            top: 25px;
-            right: -40px;
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: white;
-            padding: 8px 45px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            transform: rotate(45deg);
-            z-index: 20;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-align: center;
-        }
-
         .certificate-image-container {
             width: 100%;
             height: 350px;
@@ -644,7 +606,6 @@
             border: 2px solid #e2e8f0;
             position: relative;
             transition: all 0.3s ease;
-            z-index: 10;
         }
 
         .certificate-card:hover .certificate-image-container {
@@ -717,11 +678,6 @@
             transform: rotate(10deg) scale(1.15);
             box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
         }
-        
-        .featured-cert .certificate-icon {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
-            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.4) !important;
-        }
 
         .certificate-content {
             flex: 1;
@@ -754,7 +710,7 @@
             box-shadow: 0 8px 20px rgba(72, 187, 120, 0.4) !important;
         }
 
-        .education-cert:not(.featured-cert):hover .education-icon {
+        .education-cert:hover .education-icon {
             box-shadow: 0 12px 30px rgba(72, 187, 120, 0.6) !important;
         }
 
@@ -813,10 +769,7 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
- <body oncontextmenu="return false">
-  <!-- ============================================ --> 
-  <!-- 📝 HTML SECTION - PAGE STRUCTURE --> 
-  <!-- ============================================ -->
+ <body oncontextmenu="return false"><!-- ============================================ --> <!-- 📝 HTML SECTION - PAGE STRUCTURE --> <!-- ============================================ -->
   <div class="animated-bg">
    <div class="floating-shape"></div>
    <div class="floating-shape"></div>
@@ -824,8 +777,7 @@
    <div class="floating-shape"></div>
   </div>
   <main class="container" class="nocopy">
-   <div class="resume-card">
-    <!-- HEADER -->
+   <div class="resume-card"><!-- HEADER -->
     <header class="header-section">
      <div class="profile-content">
       <div class="profile-avatar" id="avatar"><img id="avatarImage" class="profile-avatar-image" style="display: none;" alt="Profile Photo">
@@ -857,57 +809,46 @@
        </div>
       </div>
      </div>
-    </header>
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-     <!-- ABOUT ME -->
+    </header><!-- MAIN CONTENT -->
+    <div class="main-content"><!-- ABOUT ME -->
      <section class="section">
       <h2 class="section-title">📝 About Me</h2>
+      <p class="about-text" id="aboutText">Computer Science Graduate </p> <br>
       <p class="about-text" id="aboutText">Hi 👋 <br> My name is Pritam Bose, and I'm a B.tech Computer Science Graduate 
         from CIEM Tollygunge in the year of 2024. I also have done Diploma in Computer Science and Technology from Regent College,
         in Barrackpore, in the year of 2021. I belong to New Barrackpur from where I have completed my homeschooling.
       </p>
-     </section>
-     <!-- SKILLS -->
+     </section><!-- SKILLS -->
      <section class="section">
       <h2 class="section-title">⚡ Skills &amp; Expertise</h2>
       <div id="skillsContainer"></div>
-     </section>
-     <!-- WORK EXPERIENCE -->
+     </section><!-- WORK EXPERIENCE -->
      <section class="section">
       <h2 class="section-title">💼 Work Experience</h2>
       <div id="experienceContainer"></div>
-     </section>
-     <!-- EXPERIENCE CERTIFICATES -->
+     </section><!-- EXPERIENCE CERTIFICATES -->
      <section class="section">
       <h2 class="section-title">📜 Experience Certificates</h2>
       <div class="certificates-grid" id="experienceCertificates"></div>
-     </section>
-     <!-- EDUCATION -->
+     </section><!-- EDUCATION -->
      <section class="section">
       <h2 class="section-title">🎓 Education</h2>
       <div id="educationContainer"></div>
-     </section>
-     <!-- EDUCATION CERTIFICATES -->
+     </section><!-- EDUCATION CERTIFICATES -->
      <section class="section">
       <h2 class="section-title">📚 Education Certificates</h2>
       <div class="certificates-grid" id="educationCertificates"></div>
-     </section>
-     <!-- PROFESSIONAL CERTIFICATES -->
+     </section><!-- PROFESSIONAL CERTIFICATES -->
      <section class="section">
       <h2 class="section-title">⭐ Professional Certificates</h2>
       <div class="certificates-grid" id="professionalCertificates"></div>
      </section>
     </div>
    </div>
-  </main>
-
-  <!-- ============================================ --> 
-  <!-- ⚙️ JAVASCRIPT SECTION - ALL FUNCTIONALITY --> 
-  <!-- ============================================ -->
+  </main><!-- ============================================ --> <!-- ⚙️ JAVASCRIPT SECTION - ALL FUNCTIONALITY --> <!-- ============================================ -->
   <script>
         // ============================================
-        // 🔧 SKILLS DATA (EDIT HERE)
+        // ������ SKILLS DATA (EDIT HERE)
         // ============================================
         const skillsData = [
             {
@@ -994,7 +935,7 @@
                 title: "INTERNSHIP —— Data Science & Data Analysis Project",
                 issuer: "360DigitMg",
                 date: "Apr - 2024",
-                pdfUrl: "https://drive.google.com/file/d/1OJKzOSAlEFjUyHv9ESYWuaLvSOp7-QZf/view?usp=sharing" 
+                pdfUrl: "https://drive.google.com/file/d/1OJKzOSAlEFjUyHv9ESYWuaLvSOp7-QZf/view?usp=sharing" // Add your Google Drive PDF link here
             },
             {
                 title: "Advanced Software Engineering Job Simulation",
@@ -1027,29 +968,22 @@
         // ============================================
         const educationCertificates = [
             {
-                title: "Final Degree: Bachelor of Computer Science",
-                issuer: "Calcutta Institute of Engineering And Management (CIEM)",
-                date: "2024",
-                pdfUrl: "YOUR_FINAL_DEGREE_PDF_LINK_HERE", // <-- REPLACE THIS WITH YOUR GOOGLE DRIVE LINK
-                featured: true
-            },
-            {
                 title: "Bachelor of Computer Science",
                 issuer: "Calcutta Institute of Engineering And Management (CIEM)",
                 date: "2024",
-                pdfUrl: "https://drive.google.com/file/d/18ERRGWYzRdNMqywHZNRloo_7EYI-1rwH/view?usp=sharing" 
+                pdfUrl: "https://drive.google.com/file/d/18ERRGWYzRdNMqywHZNRloo_7EYI-1rwH/view?usp=sharing" // Add your Google Drive PDF link here
             },
             {
                 title: "Certificate Validity of Bachelor of Computer Science",
                 issuer: "Calcutta Institute of Engineering And Management (CIEM)",
                 date: "2024",
-                pdfUrl: "https://drive.google.com/file/d/1w7150ddwNuyPW-wWATHZljecyUKNnmN9/view?usp=sharing" 
+                pdfUrl: "https://drive.google.com/file/d/1w7150ddwNuyPW-wWATHZljecyUKNnmN9/view?usp=sharing" // Add your Google Drive PDF link here
             },
             {
                 title: "Bachelor of Computer Science (provisional certificate)",
                 issuer: "Calcutta Institute of Engineering And Management (CIEM)",
                 date: "2024",
-                pdfUrl: "https://drive.google.com/file/d/17L31rUhyuZTuLXdXzLi_6rT6YHLBltv6/view?usp=sharing" 
+                pdfUrl: "https://drive.google.com/file/d/17L31rUhyuZTuLXdXzLi_6rT6YHLBltv6/view?usp=sharing" // Add your Google Drive PDF link here
             },
             {
                 title: "Diploma in Computer Science & Technology",
@@ -1270,15 +1204,6 @@
         function createCertificateCard(cert, type) {
             const card = document.createElement('div');
             card.className = `certificate-card ${type}-cert`;
-            
-            // Check if this is the highlighted final degree
-            if (cert.featured) {
-                card.classList.add('featured-cert');
-                const badge = document.createElement('div');
-                badge.className = 'featured-badge';
-                badge.textContent = 'FINAL DEGREE';
-                card.appendChild(badge);
-            }
             
             let iconPath, iconColor;
             if (type === 'education') {
