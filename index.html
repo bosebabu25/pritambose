@@ -264,8 +264,23 @@
         }
         .certificate-card:hover::after { opacity: 1; }
 
-        .certificate-image-container { height: 280px; border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 1.5rem; background: #f1f5f9; border: 1px solid #e2e8f0; }
-        .certificate-pdf { width: 100%; height: 100%; border: none; }
+        /* HIDDEN POP-OUT BUTTON TRICK */
+        .certificate-image-container { 
+            height: 280px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            position: relative; 
+            margin-bottom: 1.5rem; 
+            background: #f1f5f9; 
+            border: 1px solid #e2e8f0; 
+        }
+        .certificate-pdf { 
+            width: 100%; 
+            height: calc(100% + 56px); /* Compensate for the shifted margin */
+            border: none; 
+            margin-top: -56px; /* Hides the top 56px toolbar with the pop-out button */
+        }
+        
         .pdf-view-button {
             position: absolute; bottom: 1rem; right: 1rem;
             background: var(--rgb-gradient); background-size: 200% auto; animation: flowRGB 3s linear infinite;
