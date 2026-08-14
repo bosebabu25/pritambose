@@ -118,12 +118,57 @@
         }
 
         /* ============================================ */
-        /* 🎨 SIMPLE, CLEAN, EYE-PLEASING BACKGROUND */
+        /* 🎨 SOFT PASTEL AURORA BACKGROUND */
         /* ============================================ */
         .animated-bg {
             position: fixed; inset: 0; z-index: 0;
-            background: var(--bg-color); /* Perfectly simple off-white */
+            background: var(--bg-color);
             overflow: hidden; pointer-events: none;
+        }
+
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(110px);
+            opacity: 0.4;
+            will-change: transform;
+        }
+        .bg-blob-1 {
+            width: 34rem; height: 34rem; top: -10rem; left: -8rem;
+            background: #38bdf8; /* sky blue */
+            animation: floatBlobA 24s ease-in-out infinite;
+        }
+        .bg-blob-2 {
+            width: 30rem; height: 30rem; top: -8rem; right: -9rem;
+            background: #a78bfa; /* violet */
+            animation: floatBlobB 28s ease-in-out infinite;
+        }
+        .bg-blob-3 {
+            width: 28rem; height: 28rem; bottom: -9rem; left: 12%;
+            background: #f0abfc; /* orchid pink */
+            animation: floatBlobC 26s ease-in-out infinite;
+        }
+        .bg-blob-4 {
+            width: 26rem; height: 26rem; bottom: -8rem; right: 6%;
+            background: #6ee7b7; /* mint */
+            animation: floatBlobA 30s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatBlobA {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(3rem, 2rem) scale(1.08); }
+        }
+        @keyframes floatBlobB {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-2.5rem, 2.5rem) scale(1.05); }
+        }
+        @keyframes floatBlobC {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(2rem, -2rem) scale(1.1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bg-blob { animation: none !important; }
         }
 
         /* CONTAINER */
@@ -135,19 +180,19 @@
         /* Glass Card */
         .resume-card {
             background: var(--glass-bg);
+            /* Gradient ring is painted directly as part of the border (border-box),
+               with the card's own white fill clipped to the padding-box on top of it.
+               This can never bleed into the card's interior, regardless of any
+               transform/animation on this element. */
+            background-image: linear-gradient(var(--glass-bg), var(--glass-bg)), var(--pleasant-gradient);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            border: 2px solid transparent;
             border-radius: 24px;
             box-shadow: 0 10px 40px rgba(15, 23, 42, 0.05);
             position: relative;
             transform: translateY(30px); opacity: 0;
             animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            border: 1px solid #e2e8f0;
-        }
-
-        /* Calm border for the main card */
-        .resume-card::before {
-            content: ""; position: absolute; inset: -4px; z-index: -1;
-            background: var(--pleasant-gradient); 
-            border-radius: 28px;
         }
 
         @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
@@ -275,18 +320,67 @@
         .skills-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem; }
         .skill-tag {
             padding: 1rem 1.8rem; border-radius: 12px;
-            background: #ffffff; border: 2px solid transparent;
+            background: #ffffff; border: 2px solid #e2e8f0;
             font-size: 1.1rem; cursor: pointer; transition: 0.3s;
             box-shadow: 0 4px 10px var(--shadow-light);
-            background-clip: padding-box; position: relative;
+            position: relative;
         }
-        
-        .skill-tag::before {
-            content: ""; position: absolute; inset: -2px; z-index: -1;
-            background: var(--pleasant-gradient); border-radius: 14px; opacity: 0; transition: 0.3s;
+
+        .skill-tag:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15);
         }
-        .skill-tag:hover { transform: translateY(-5px); }
-        .skill-tag:hover::before { opacity: 1; }
+
+        .skill-emoji {
+            display: inline-block;
+            margin-right: 0.5rem;
+            font-size: 1.15em;
+            transition: transform 0.3s ease;
+        }
+        .skill-tag:hover .skill-emoji { transform: scale(1.25) rotate(-8deg); }
+
+        /* Playful hover tooltip - each skill gets its own one-liner */
+        .skill-tag[data-tip]::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            width: max-content; max-width: 220px;
+            transform: translateX(-50%) translateY(6px);
+            background: #0f172a;
+            color: #ffffff !important;
+            padding: 0.6rem 0.9rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.35;
+            white-space: normal;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+            z-index: 30;
+        }
+        .skill-tag[data-tip]::before {
+            content: "";
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            border: 6px solid transparent;
+            border-top-color: #0f172a;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 30;
+        }
+        .skill-tag[data-tip]:hover::after,
+        .skill-tag[data-tip]:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
 
         /* Certificates Gallery */
         .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 2.5rem; }
@@ -295,13 +389,11 @@
             border: 1px solid #e2e8f0; transition: 0.4s;
             box-shadow: 0 8px 20px var(--shadow-light); position: relative;
         }
-        .certificate-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(14, 165, 233, 0.1); }
-        
-        .certificate-card::after {
-            content: ""; position: absolute; inset: -2px; z-index: -1;
-            background: var(--pleasant-gradient); border-radius: 22px; opacity: 0; transition: 0.3s;
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            border-color: #3b82f6;
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
         }
-        .certificate-card:hover::after { opacity: 1; }
 
         /* Clean Frame for PDF Previews */
         .certificate-image-container { 
@@ -390,8 +482,13 @@
  </head>
  <body oncontextmenu="return false">
 
-  <!-- SIMPLE, LIGHT BACKGROUND -->
-  <div class="animated-bg"></div>
+  <!-- SOFT, LIGHT AURORA BACKGROUND -->
+  <div class="animated-bg">
+   <div class="bg-blob bg-blob-1"></div>
+   <div class="bg-blob bg-blob-2"></div>
+   <div class="bg-blob bg-blob-3"></div>
+   <div class="bg-blob bg-blob-4"></div>
+  </div>
 
   <main class="container">
    <div class="resume-card">
@@ -578,10 +675,27 @@
         // 🔧 DATA
         // ============================================
         const skillsData = [
-            { category: "Data Analysis & Visualisation", skills: ["Data Analysis", "Data Visualisation", "PivotTable Analysis", "MS PowerBI", "Google Data Studio"] },
-            { category: "Design Tools & Prototyping", skills: ["Canva", "MS Desiginer", "Figma", "Adobe Express"] },
-            { category: "Database & Query Tools", skills: ["MySQL", "Advanced Excel"] },
-            { category: "Programming Languages", skills: ["Java", "Python"] }
+            { category: "Data Analysis & Visualisation", skills: [
+                { name: "Data Analysis", emoji: "🔍", quip: "Turning messy data into 'aha!' moments" },
+                { name: "Data Visualisation", emoji: "📊", quip: "Making spreadsheets Instagram-worthy" },
+                { name: "PivotTable Analysis", emoji: "🌀", quip: "Pivot now, panic later" },
+                { name: "MS PowerBI", emoji: "⚡", quip: "Dashboards so clean they spark joy" },
+                { name: "Google Data Studio", emoji: "📈", quip: "Charts my manager actually understands" }
+            ]},
+            { category: "Design Tools & Prototyping", skills: [
+                { name: "Canva", emoji: "🎨", quip: "Drag, drop, ship it" },
+                { name: "MS Designer", emoji: "🖌️", quip: "AI does the heavy lifting, I take the bow" },
+                { name: "Figma", emoji: "🧩", quip: "Pixel-perfect, most days" },
+                { name: "Adobe Express", emoji: "✨", quip: "Photoshop's speedy little sibling" }
+            ]},
+            { category: "Database & Query Tools", skills: [
+                { name: "MySQL", emoji: "🗄️", quip: "SELECT * FROM skills WHERE cool = true;" },
+                { name: "Advanced Excel", emoji: "📐", quip: "VLOOKUP is basically my love language" }
+            ]},
+            { category: "Programming Languages", skills: [
+                { name: "Java", emoji: "☕", quip: "Write once, debug forever" },
+                { name: "Python", emoji: "🐍", quip: "import happiness" }
+            ]}
         ];
 
         const workExperiences = [
@@ -639,7 +753,9 @@
                 cat.skills.forEach(skill => {
                     const tag = document.createElement('div');
                     tag.className = 'skill-tag reveal';
-                    tag.textContent = skill; grid.appendChild(tag);
+                    tag.setAttribute('data-tip', skill.quip);
+                    tag.innerHTML = `<span class="skill-emoji">${skill.emoji}</span>${skill.name}`;
+                    grid.appendChild(tag);
                 });
                 container.appendChild(grid);
             });
