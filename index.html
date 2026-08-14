@@ -11,18 +11,20 @@
   <script src="/_sdk/element_sdk.js"></script>
 
   <!-- ============================================ --> 
-  <!-- 🎨 CSS SECTION - ULTRA-PREMIUM VISUALS --> 
+  <!-- 🎨 CSS SECTION - PREMIUM LIGHT MODE --> 
   <!-- ============================================ -->
   <style>
         :root {
-            --bg-color: #0f172a;
-            --surface-color: #020617;
-            --text-color: #f8fafc;
-            --primary-color: #3b82f6;
-            --secondary-color: #8b5cf6;
-            --glass-bg: rgba(15, 23, 42, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glow-color: rgba(59, 130, 246, 0.5);
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --text-color: #0f172a;
+            --text-muted: #475569;
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --glow-color: rgba(37, 99, 235, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,7 +32,7 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--surface-color);
+            background: var(--bg-color);
             color: var(--text-color);
             min-height: 100%;
             overflow-x: hidden;
@@ -39,29 +41,28 @@
 
         /* Custom Premium Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--surface-color); }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
             border-radius: 10px;
         }
 
-        /* Holographic Grid & Orbs Background */
+        /* Light Holographic Grid & Orbs Background */
         .animated-bg {
             position: fixed; inset: 0; z-index: 0;
-            background-color: var(--surface-color);
+            background-color: #f1f5f9;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.1) 0px, transparent 50%);
             overflow: hidden; pointer-events: none;
         }
         
         .grid-overlay {
             position: absolute; inset: 0;
             background-image: 
-                linear-gradient(var(--glass-border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+                linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
-            opacity: 0.3;
             transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(3);
             animation: gridMove 20s linear infinite;
         }
@@ -79,9 +80,9 @@
         /* Main Glass Card */
         .resume-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border-radius: 24px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5), inset 0 0 0 1px var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1), inset 0 0 0 1px var(--glass-border);
             overflow: hidden;
             transform: translateY(30px); opacity: 0;
             animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -93,8 +94,8 @@
         .header-section {
             padding: 5rem 3rem;
             position: relative;
-            border-bottom: 1px solid var(--glass-border);
-            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
         }
 
         .profile-content {
@@ -107,149 +108,152 @@
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             padding: 4px;
-            box-shadow: 0 0 30px var(--glow-color);
+            box-shadow: 0 10px 30px var(--glow-color);
             animation: pulseGlow 3s infinite alternate;
         }
         
         @keyframes pulseGlow {
-            0% { box-shadow: 0 0 20px var(--glow-color); }
-            100% { box-shadow: 0 0 50px var(--glow-color), 0 0 100px var(--primary-color); }
+            0% { box-shadow: 0 10px 20px var(--glow-color); }
+            100% { box-shadow: 0 15px 40px rgba(124, 58, 237, 0.4); }
         }
 
         .profile-avatar {
             width: 100%; height: 100%; border-radius: 50%;
             background: var(--surface-color);
             display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; font-weight: 800; color: white; overflow: hidden;
+            font-size: 3rem; font-weight: 800; color: var(--primary-color); overflow: hidden;
         }
 
         .profile-avatar-image { width: 100%; height: 100%; object-fit: cover; }
 
         .profile-info h1 {
             font-size: 3.5rem; font-weight: 900;
-            background: linear-gradient(to right, #fff, var(--primary-color), var(--secondary-color), #fff);
+            background: linear-gradient(to right, #0f172a, var(--primary-color), var(--secondary-color), #0f172a);
             background-size: 200% auto;
             -webkit-background-clip: text; color: transparent;
-            animation: shineText 4s linear infinite;
+            animation: shineText 5s linear infinite;
         }
 
         @keyframes shineText { to { background-position: 200% center; } }
 
-        .job-title { font-size: 1.4rem; color: #94a3b8; font-weight: 500; margin-bottom: 0.5rem; }
-        .tagline { font-size: 1.1rem; color: #64748b; font-style: italic; margin-bottom: 1.5rem; }
+        .job-title { font-size: 1.4rem; color: #334155; font-weight: 700; margin-bottom: 0.5rem; }
+        .tagline { font-size: 1.1rem; color: var(--text-muted); font-style: italic; margin-bottom: 1.5rem; }
 
         .contact-info { display: flex; gap: 1rem; flex-wrap: wrap; }
         .contact-item {
             display: flex; align-items: center; gap: 0.5rem;
             padding: 0.5rem 1.2rem; border-radius: 50px;
-            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
-            color: #cbd5e1; font-size: 0.95rem; transition: 0.3s;
+            background: #ffffff; border: 1px solid #e2e8f0;
+            color: var(--text-muted); font-size: 0.95rem; transition: 0.3s;
+            box-shadow: 0 2px 5px var(--shadow-light);
         }
         .contact-item:hover {
             background: var(--primary-color); border-color: var(--primary-color); color: white;
-            box-shadow: 0 0 15px var(--glow-color); transform: translateY(-2px);
+            box-shadow: 0 10px 20px var(--glow-color); transform: translateY(-2px);
         }
 
         .main-content { padding: 4rem 3rem; }
         
         .section-title {
             font-size: 2rem; font-weight: 800; margin-bottom: 2.5rem;
-            display: flex; align-items: center; gap: 1rem;
+            display: flex; align-items: center; gap: 1rem; color: var(--text-color);
         }
         .section-title::after {
-            content: ''; flex: 1; height: 2px;
+            content: ''; flex: 1; height: 3px;
             background: linear-gradient(90deg, var(--primary-color), transparent);
+            border-radius: 2px;
         }
 
         /* About Text */
         .about-text {
-            color: #cbd5e1; line-height: 1.8; font-size: 1.1rem;
-            background: rgba(255,255,255,0.02); padding: 2rem;
-            border-radius: 16px; border-left: 4px solid var(--primary-color);
-            transition: 0.3s;
+            color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;
+            background: #ffffff; padding: 2.5rem;
+            border-radius: 16px; border-left: 6px solid var(--primary-color);
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: 0.3s; border-right: 1px solid #e2e8f0; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;
         }
-        .about-text:hover { background: rgba(255,255,255,0.05); border-left-color: var(--secondary-color); }
+        .about-text:hover { transform: translateX(5px); border-left-color: var(--secondary-color); box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
 
         /* Timeline Items */
-        .timeline-container { position: relative; padding-left: 2rem; border-left: 2px solid rgba(255,255,255,0.1); }
+        .timeline-container { position: relative; padding-left: 2rem; border-left: 3px solid #e2e8f0; }
         .experience-item, .education-item {
-            position: relative; background: rgba(255,255,255,0.03);
+            position: relative; background: #ffffff;
             padding: 2rem; border-radius: 16px; margin-bottom: 2rem;
-            border: 1px solid var(--glass-border); transition: 0.4s;
+            border: 1px solid #e2e8f0; transition: 0.4s;
+            box-shadow: 0 4px 15px var(--shadow-light);
         }
         .experience-item::before, .education-item::before {
-            content: ''; position: absolute; left: -2.45rem; top: 2.5rem;
-            width: 16px; height: 16px; border-radius: 50%;
-            background: var(--surface-color); border: 4px solid var(--primary-color);
-            transition: 0.3s;
+            content: ''; position: absolute; left: -2.6rem; top: 2.5rem;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: #ffffff; border: 4px solid var(--primary-color);
+            transition: 0.3s; box-shadow: 0 0 0 4px white;
         }
         .experience-item:hover, .education-item:hover {
-            transform: translateX(10px); background: rgba(255,255,255,0.06);
-            border-color: var(--primary-color); box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+            transform: translateY(-5px); border-color: var(--primary-color);
+            box-shadow: 0 15px 30px var(--glow-color);
         }
-        .experience-item:hover::before, .education-item:hover::before { background: var(--primary-color); box-shadow: 0 0 15px var(--primary-color); }
+        .experience-item:hover::before, .education-item:hover::before { background: var(--primary-color); box-shadow: 0 0 0 4px white, 0 0 15px var(--primary-color); }
         
-        .item-title { font-weight: 700; font-size: 1.3rem; margin-bottom: 0.5rem; color: white; }
-        .item-company { color: var(--primary-color); font-weight: 600; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem;}
-        .item-date { position:absolute; right:2rem; top: 2rem; font-size: 0.85rem; color: #94a3b8; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 20px;}
-        .item-description { color: #94a3b8; font-size: 1rem; line-height: 1.6; }
+        .item-title { font-weight: 800; font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-color); }
+        .item-company { color: var(--primary-color); font-weight: 700; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem;}
+        .item-date { position:absolute; right:2rem; top: 2rem; font-size: 0.85rem; color: white; font-weight: 600; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); padding: 6px 14px; border-radius: 20px; box-shadow: 0 4px 10px var(--glow-color);}
+        .item-description { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; }
 
         /* Skills */
         .skills-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
         .skill-tag {
             padding: 0.8rem 1.5rem; border-radius: 12px;
-            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
-            color: #cbd5e1; font-weight: 500; cursor: pointer; transition: 0.3s;
+            background: #ffffff; border: 1px solid #e2e8f0;
+            color: var(--text-color); font-weight: 600; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 2px 5px var(--shadow-light);
         }
         .skill-tag:hover {
             background: var(--skill-color); color: white;
-            border-color: var(--skill-color); box-shadow: 0 0 15px var(--skill-color);
+            border-color: var(--skill-color); box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             transform: translateY(-3px);
         }
 
         /* Certificates */
         .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
         .certificate-card {
-            background: rgba(255,255,255,0.02); border-radius: 20px; padding: 1.5rem;
-            border: 1px solid var(--glass-border); transition: 0.4s;
+            background: #ffffff; border-radius: 20px; padding: 1.5rem;
+            border: 1px solid #e2e8f0; transition: 0.4s;
+            box-shadow: 0 10px 25px var(--shadow-light);
         }
         .certificate-card:hover {
-            transform: translateY(-10px); background: rgba(255,255,255,0.05);
-            border-color: var(--primary-color); box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px var(--glow-color);
+            transform: translateY(-10px); border-color: var(--primary-color); 
+            box-shadow: 0 20px 40px var(--glow-color);
         }
-        .certificate-image-container { height: 250px; border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); background: #0f172a; }
+        .certificate-image-container { height: 250px; border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 1.5rem; background: #f1f5f9; border: 1px solid #e2e8f0; }
         .certificate-pdf { width: 100%; height: 100%; border: none; }
         .pdf-view-button {
             position: absolute; bottom: 1rem; right: 1rem;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white; padding: 0.6rem 1.2rem; border-radius: 8px;
-            text-decoration: none; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.2); transition: 0.3s;
+            text-decoration: none; font-size: 0.85rem; font-weight: 700; transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        .pdf-view-button:hover { background: var(--primary-color); border-color: var(--primary-color); }
-        .cert-info h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
-        .cert-info p { color: var(--primary-color); font-size: 0.9rem; font-weight: 600;}
+        .pdf-view-button:hover { transform: scale(1.05); }
+        .cert-info h3 { font-size: 1.1rem; margin-bottom: 0.2rem; color: var(--text-color); font-weight: 800;}
+        .cert-info p { color: var(--primary-color); font-size: 0.9rem; font-weight: 700;}
 
         /* Featured Final Degree Highlight */
-        .featured-cert { border-color: #fbbf24; background: rgba(251, 191, 36, 0.05); overflow: hidden;}
-        .featured-cert:hover { box-shadow: 0 0 30px rgba(251, 191, 36, 0.3); border-color: #f59e0b; }
+        .featured-cert { border-color: #fbbf24; background: #fffbeb; overflow: hidden; box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);}
+        .featured-cert:hover { box-shadow: 0 20px 40px rgba(251, 191, 36, 0.4); border-color: #f59e0b; }
         .featured-badge {
             position: absolute; top: 25px; right: -35px;
-            background: #fbbf24; color: black; padding: 5px 40px; font-size: 0.75rem; font-weight: 900;
-            transform: rotate(45deg); z-index: 10;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; padding: 5px 40px; font-size: 0.75rem; font-weight: 900;
+            transform: rotate(45deg); z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         /* ============================================ */
-        /* 📬 PREMIUM ENQUIRY FORM STYLES */
+        /* 📬 LIGHT MODE ENQUIRY FORM STYLES */
         /* ============================================ */
         .contact-form-container {
-            background: rgba(255,255,255,0.02); padding: 3rem;
-            border-radius: 24px; border: 1px solid var(--glass-border);
+            background: #ffffff; padding: 3rem;
+            border-radius: 24px; border: 1px solid #e2e8f0;
             position: relative; overflow: hidden;
-        }
-        .contact-form-container::before {
-            content:''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, var(--glow-color) 0%, transparent 50%);
-            opacity: 0.1; pointer-events: none;
+            box-shadow: 0 15px 40px var(--shadow-light);
         }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
         
@@ -258,21 +262,21 @@
         
         .form-input {
             width: 100%; padding: 1.2rem;
-            background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
-            border-radius: 12px; color: white; font-size: 1rem;
-            outline: none; transition: 0.3s;
+            background: #f8fafc; border: 1px solid #cbd5e1;
+            border-radius: 12px; color: var(--text-color); font-size: 1rem;
+            outline: none; transition: 0.3s; font-family: inherit;
         }
-        .form-input:focus { border-color: var(--primary-color); box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); background: rgba(0,0,0,0.5); }
+        .form-input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 4px var(--glow-color); background: #ffffff; }
         
         /* Floating Labels */
         .form-label {
             position: absolute; left: 1rem; top: 1.2rem;
-            color: #94a3b8; pointer-events: none; transition: 0.3s;
+            color: #64748b; pointer-events: none; transition: 0.3s;
             background: transparent; padding: 0 0.5rem; font-size: 1rem;
         }
         .form-input:focus ~ .form-label, .form-input:not(:placeholder-shown) ~ .form-label {
             top: -0.6rem; left: 0.8rem; font-size: 0.85rem; color: var(--primary-color);
-            background: var(--surface-color); border-radius: 4px;
+            background: #ffffff; border-radius: 4px; font-weight: 600;
         }
 
         .submit-btn {
@@ -280,12 +284,13 @@
             color: white; border: none; padding: 1.2rem 3rem; border-radius: 12px;
             font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: 0.3s;
             display: inline-flex; align-items: center; gap: 1rem; width: 100%; justify-content: center;
+            box-shadow: 0 10px 20px var(--glow-color);
         }
-        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px var(--glow-color); }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px var(--glow-color); }
         
-        #formMessage { margin-top: 1rem; text-align: center; font-weight: 500; display: none; padding: 1rem; border-radius: 8px;}
-        .success-msg { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
-        .error-msg { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        #formMessage { margin-top: 1rem; text-align: center; font-weight: 600; display: none; padding: 1rem; border-radius: 8px;}
+        .success-msg { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .error-msg { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
 
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -376,13 +381,18 @@
      </section>
 
      <!-- ============================================ -->
-     <!-- 📬 NEW CONTACT / ENQUIRY FORM SECTION        -->
+     <!-- 📬 ENQUIRY FORM SECTION (WITH NAME FIELD)    -->
      <!-- ============================================ -->
      <section class="section reveal" id="contact">
         <h2 class="section-title">📬 Connect With Me</h2>
         <div class="contact-form-container">
             <form id="enquiryForm">
                 <div class="form-grid">
+                    <!-- Name (Optional) -->
+                    <div class="input-group">
+                        <input type="text" id="formName" name="Name" class="form-input" placeholder=" ">
+                        <label for="formName" class="form-label">Full Name (Optional)</label>
+                    </div>
                     <!-- Email (Optional) -->
                     <div class="input-group">
                         <input type="email" id="formEmail" name="Email" class="form-input" placeholder=" ">
@@ -394,7 +404,7 @@
                         <label for="formPhone" class="form-label">Phone Number (Optional)</label>
                     </div>
                     <!-- Position (Optional) -->
-                    <div class="input-group full-width">
+                    <div class="input-group">
                         <input type="text" id="formPosition" name="Position" class="form-input" placeholder=" ">
                         <label for="formPosition" class="form-label">Position / Company (Optional)</label>
                     </div>
@@ -418,7 +428,7 @@
   </main>
 
   <!-- ============================================ --> 
-  <!-- ⚙️ JAVASCRIPT SECTION - HIGH PERFORMANCE --> 
+  <!-- ⚙️ JAVASCRIPT SECTION - FULL DATA RESTORED --> 
   <!-- ============================================ -->
   <script>
         // ============================================
@@ -428,39 +438,55 @@
         const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE"; 
 
         // ============================================
-        // 🔧 DATA CONFIGURATION
+        // 🔧 ALL ORIGINAL DATA RESTORED
         // ============================================
         const skillsData = [
-            { color: "#3b82f6", skills: ["Data Analysis", "Data Visualisation", "MS PowerBI", "Google Data Studio"] },
-            { color: "#8b5cf6", skills: ["Canva", "MS Desiginer", "Figma", "Adobe Express"] },
+            { color: "#2563eb", skills: ["Data Analysis", "Data Visualisation", "PivotTable Analysis", "MS PowerBI", "Google Data Studio"] },
+            { color: "#7c3aed", skills: ["Canva", "MS Desiginer", "Figma", "Adobe Express"] },
             { color: "#10b981", skills: ["MySQL", "Advanced Excel"] },
             { color: "#f59e0b", skills: ["Java", "Python"] }
         ];
 
         const workExperiences = [
-            { title: "INTERNSHIP —— Data Science", company: "360DigitMg", date: "Apr - 2024", description: "Medical Inventory Optimisation. Minimized bounce rate and reduced inventory cost." },
-            { title: "Software Engineering Simulation", company: "Wallmart Global Tech", date: "Mar - 2026", description: "Developed a novel heap data structure in Java. Created UML class diagrams and ERDs." },
-            { title: "PowerBI Data Visualisation", company: "PwC", date: "Jun - 2024", description: "Created dynamic Power BI dashboards to convey KPIs effectively to clients." }
+            { title: "INTERNSHIP —— Data Science & Data Analysis Project", company: "360DigitMg", date: "Apr - 2024", description: "Medical Inventory Optimisation<br><br>👉 Business Objective: Minimize bounce rate.<br>👉 Business Constraint: Minimize inventory cost<br>👉 Success Criteria: Reduce bounce rate by at least 30%. Increase revenue by at least 20 lacs INR." },
+            { title: "Advanced Software Engineering Job Simulation", company: "Wallmart Global Tech", date: "Mar - 2026", description: "👉 Solved difficult technical projects for a variety of teams at Walmart. <br> 👉 Developed a novel version of a heap data structure in Java. <br> 👉 Designed a UML class diagram for a data processor. <br> 👉 Created an entity relationship diagram to design a new database." },
+            { title: "PowerBI Data Visualisation", company: "PwC", date: "Jun - 2024", description: "👉 Demonstrated expertise in data visualization through the creation of Power BI dashboards that effectively conveyed KPIs. <br>👉 Examined HR data, particularly focusing on gender-related KPIs, and identified root causes for gender balance issues." },
+            { title: "Excel Skills Job", company: "JPMorgan Chase & Co.", date: "Nov - 2023", description: "👉 Data cleansing, manipulation, and conditional formatting techniques. <br>👉 Acquired proficiency in automation by learning to record macros and script in Visual Basic for Applications (VBA). <br>👉 Created impactful charts and interactive dashboards." },
+            { title: "Data Visualisation: Empowering Business with Effective Insights", company: "TCS", date: "Oct - 2023", description: "👉 Completed a simulation involving creating data visualizations for Tata Consultancy Services. <br>👉 Prepared questions for a meeting with client senior leadership. <br>👉 Created visuals for data analysis to help executives with effective decision making." }
         ];
 
         const educationList = [
-            { title: "B.Tech Computer Science", company: "CIEM", date: "2021 - 2024", description: "Specialized in Data Analysis & Visualisation. CGPA - 8.09" },
-            { title: "Diploma in Computer Science", company: "RIST", date: "2018 - 2021", description: "Professional Diploma. Obtained 80% in course work" }
+            { title: "Bachelor of Computer Science & Engineering", company: "Calcutta Institute of Engineering And Management (CIEM)", date: "2021 - 2024", description: "Specialized in Data Analysis & Visualisation. CGPA - 8.09" },
+            { title: "Diploma in Computer Science & Technology", company: "Regent Institute of Science and Technology (RIST)", date: "2018 - 2021", description: "Professional Diploma in Computer Technology. Obtained 80% in course work" }
         ];
 
         const experienceCertificates = [
-            { title: "Data Science Project", issuer: "360DigitMg", date: "Apr - 2024", pdfUrl: "https://drive.google.com/file/d/1OJKzOSAlEFjUyHv9ESYWuaLvSOp7-QZf/view" },
-            { title: "PowerBI Visualisation", issuer: "PwC", date: "Jun - 2024", pdfUrl: "https://drive.google.com/file/d/1cntBUENKWTincb2GFT1un20cXl6BbW21/view" }
+            { title: "INTERNSHIP —— Data Science & Data Analysis Project", issuer: "360DigitMg", date: "Apr - 2024", pdfUrl: "https://drive.google.com/file/d/1OJKzOSAlEFjUyHv9ESYWuaLvSOp7-QZf/view?usp=sharing" },
+            { title: "Advanced Software Engineering Job Simulation", issuer: "Wallmart Global Tech", date: "Mar - 2025", pdfUrl: "https://drive.google.com/file/d/1KcQ8UaEXrylyn4ngViGGZHHbpvRFtAWJ/view?usp=sharing" },
+            { title: "PowerBI Data Visualisation", issuer: "PwC", date: "Jun - 2024", pdfUrl: "https://drive.google.com/file/d/1cntBUENKWTincb2GFT1un20cXl6BbW21/view?usp=sharing" },
+            { title: "Excel Skills Job", issuer: "JPMorgan Chase & Co.", date: "Nov - 2023", pdfUrl: "https://drive.google.com/file/d/11fRExxEG9HcqsWsU5tsqswrPpEIOxD9A/view?usp=sharing" },
+            { title: "Data Visualisation: Empowering Business", issuer: "TCS", date: "Oct - 2023", pdfUrl: "https://drive.google.com/file/d/1lKF9XNN9IE-aCaEQeoe-JeFgW6EEI33U/view?usp=sharing" }
         ];
 
         const educationCertificates = [
-            { title: "Final Degree: B.Tech CS", issuer: "CIEM", date: "2024", pdfUrl: "YOUR_FINAL_DEGREE_PDF_LINK_HERE", featured: true },
-            { title: "Diploma in CS", issuer: "RIST", date: "2021", pdfUrl: "https://drive.google.com/file/d/1dWgDxfECusXOCBJJfnrJ5XsHnUkTJyKy/view" }
+            { title: "Final Degree: Bachelor of Computer Science", issuer: "Calcutta Institute of Engineering And Management (CIEM)", date: "2024", pdfUrl: "YOUR_FINAL_DEGREE_PDF_LINK_HERE", featured: true }, // <-- INSERT LINK HERE
+            { title: "Bachelor of Computer Science", issuer: "CIEM", date: "2024", pdfUrl: "https://drive.google.com/file/d/18ERRGWYzRdNMqywHZNRloo_7EYI-1rwH/view?usp=sharing" },
+            { title: "Certificate Validity of Bachelor of CS", issuer: "CIEM", date: "2024", pdfUrl: "https://drive.google.com/file/d/1w7150ddwNuyPW-wWATHZljecyUKNnmN9/view?usp=sharing" },
+            { title: "Bachelor of Computer Science (Provisional)", issuer: "CIEM", date: "2024", pdfUrl: "https://drive.google.com/file/d/17L31rUhyuZTuLXdXzLi_6rT6YHLBltv6/view?usp=sharing" },
+            { title: "Diploma in Computer Science & Technology", issuer: "RIST", date: "2021", pdfUrl: "https://drive.google.com/file/d/1dWgDxfECusXOCBJJfnrJ5XsHnUkTJyKy/view?usp=drive_link" }
         ];
 
         const professionalCertificates = [
-            { title: "Data Analysis", issuer: "Microsoft", date: "Jul - 2024", pdfUrl: "https://drive.google.com/file/d/1eiKpRJcwr316lgypaqUtyVkSG4g-cMLt/view" },
-            { title: "Master Power BI", issuer: "Udemy", date: "Oct - 2023", pdfUrl: "https://drive.google.com/file/d/1wyfjIpp76KiyNmt8C-CsPittp4pKP0ID/view" }
+            { title: "Career Essentials in Data Analysis", issuer: "Microsoft and LinkedIn", date: "Jul - 2024", pdfUrl: "https://drive.google.com/file/d/1eiKpRJcwr316lgypaqUtyVkSG4g-cMLt/view?usp=sharing" },
+            { title: "Cyber Suraksha", issuer: "Microsoft", date: "Jan - 2024", pdfUrl: "https://drive.google.com/file/d/1lX7oY-VwVfYG_FSG0IkubRqwtjaQn3wI/view?usp=sharing" },
+            { title: "Master in Microsoft Power BI Desktop", issuer: "Udemy", date: "Oct - 2023", pdfUrl: "https://drive.google.com/file/d/1wyfjIpp76KiyNmt8C-CsPittp4pKP0ID/view?usp=sharing" },
+            { title: "Geoprocessing using Python", issuer: "IIRS", date: "Aug - 2023", pdfUrl: "https://drive.google.com/file/d/1D83JORXTVZwK68OuPDq726GJSg1Zc_tV/view?usp=sharing" },
+            { title: "Data Science with Python", issuer: "Skillup", date: "Dec - 2022", pdfUrl: "https://drive.google.com/file/d/1j5a-Tazmhkhnto0neyjX5OjYpuBxsHLJ/view?usp=sharing" },
+            { title: "Machine Learning from Basics to Advance", issuer: "Udemy", date: "Nov - 2023", pdfUrl: "https://drive.google.com/file/d/1DGeU9AqTJ0Un8JZsnBZ9ZmhMxsQ7gegW/view?usp=sharing" },
+            { title: "Python Beyond the Basic and Intermediate", issuer: "Udemy", date: "Jul - 2022", pdfUrl: "https://drive.google.com/file/d/1yBMTj6usQAWZv4yiUfsq6PUbZCQpPKdd/view?usp=sharing" },
+            { title: "Coding with Java from scratch", issuer: "Udemy", date: "Jun - 2022", pdfUrl: "https://drive.google.com/file/d/11OUFSz3ZI_7f7Uj-Vo_s96C2AO05xaXW/view?usp=sharing" },
+            { title: "Cyber Security Awareness Program NIIELIT", issuer: "NIELIT", date: "Mar - 2024", pdfUrl: "https://drive.google.com/file/d/13FjnbjsUkztLBBnGm8V9EPVwk3qEnWc0/view?usp=sharing" },
+            { title: "Professional Diploma In Software Testing", issuer: "MTF Institute", date: "Sept - 2025", pdfUrl: "https://drive.google.com/file/d/1MVBZzCZ7P9NPJX0hEKZ7mhkvpRmvJbUu/view?usp=sharing" }
         ];
 
         // ============================================
@@ -508,7 +534,7 @@
                         ${badge}
                         <div class="certificate-image-container">
                             ${cert.pdfUrl ? `<iframe src="${convertToEmbedUrl(cert.pdfUrl)}" class="certificate-pdf"></iframe>
-                            <a href="${cert.pdfUrl}" target="_blank" class="pdf-view-button">View PDF</a>` : '<p style="text-align:center; padding:50px;">PDF Coming Soon</p>'}
+                            <a href="${cert.pdfUrl}" target="_blank" class="pdf-view-button">View PDF</a>` : '<p style="text-align:center; padding:100px 20px; color: #94a3b8; font-weight:600;">PDF Coming Soon</p>'}
                         </div>
                         <div class="cert-info">
                             <h3>${cert.title}</h3>
@@ -562,7 +588,7 @@
             });
         });
 
-        // Initialize
+        // Initialize Everything
         renderSkills();
         renderTimeline(workExperiences, 'experienceContainer');
         renderTimeline(educationList, 'educationContainer');
@@ -570,7 +596,7 @@
         renderCertificates(educationCertificates, 'educationCertificates');
         renderCertificates(professionalCertificates, 'professionalCertificates');
 
-        // Scroll Reveal
+        // Scroll Reveal Initialization
         setTimeout(() => {
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
