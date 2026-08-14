@@ -92,8 +92,10 @@
             overflow: hidden; pointer-events: none;
         }
         
+        /* DIMMED BACKGROUND ORBS */
         .orb {
-            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15;
+            position: absolute; border-radius: 50%; filter: blur(80px); 
+            opacity: 0.05; /* Reduced opacity to dim the background RGB */
             background: var(--rgb-gradient); background-size: 200% auto;
             animation: flowRGB 3s linear infinite, float 15s ease-in-out infinite alternate;
         }
@@ -105,9 +107,13 @@
             100% { transform: translate(50px, 100px) scale(1.2); }
         }
 
+        /* EXPANDED CONTAINER (Less empty space on left/right) */
         .container {
-            max-width: 1200px; margin: 0 auto;
-            padding: 3rem 1.5rem; position: relative; z-index: 1;
+            max-width: 1600px; /* Increased to allow wider expansion */
+            width: 96%; /* Takes up 96% of the screen width */
+            margin: 0 auto;
+            padding: 3rem 0; 
+            position: relative; z-index: 1;
         }
 
         /* Glowing RGB Glass Card */
@@ -133,41 +139,43 @@
 
         /* Header Section */
         .header-section {
-            padding: 5rem 3rem; position: relative;
+            padding: 5rem 4rem; position: relative;
             background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(248,250,252,0.9) 100%);
             border-top-left-radius: 24px; border-top-right-radius: 24px;
             border-bottom: 2px solid rgba(0,0,0,0.05);
         }
 
-        .profile-content { display: flex; gap: 3rem; align-items: center; }
+        .profile-content { display: flex; gap: 4rem; align-items: center; }
 
         /* RGB Glowing Avatar */
         .avatar-wrapper {
-            position: relative; width: 150px; height: 150px; border-radius: 50%;
+            position: relative; width: 160px; height: 160px; border-radius: 50%;
             background: var(--rgb-gradient); background-size: 200% auto;
             padding: 5px; animation: flowRGB 3s linear infinite;
             box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            flex-shrink: 0;
         }
 
         .profile-avatar {
             width: 100%; height: 100%; border-radius: 50%;
             background: var(--surface-color);
             display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; font-weight: 900; overflow: hidden;
+            font-size: 3.5rem; font-weight: 900; overflow: hidden;
         }
 
         .profile-avatar-image { width: 100%; height: 100%; object-fit: cover; }
 
-        .profile-info h1 { font-size: 3.8rem; letter-spacing: -1px; margin-bottom: 0.2rem; }
-        .job-title { font-size: 1.6rem; margin-bottom: 0.5rem; }
-        .tagline { font-size: 1.2rem; font-style: italic; margin-bottom: 1.5rem; }
+        .profile-info { flex: 1; }
+        .profile-info h1 { font-size: 4rem; letter-spacing: -1px; margin-bottom: 0.2rem; }
+        .job-title { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .tagline { font-size: 1.25rem; font-style: italic; margin-bottom: 1.5rem; }
 
         .contact-info { display: flex; gap: 1rem; flex-wrap: wrap; }
         .contact-item {
             display: flex; align-items: center; gap: 0.5rem;
             padding: 0.6rem 1.2rem; border-radius: 50px;
             background: #ffffff; border: 1px solid #e2e8f0;
-            font-size: 0.95rem; transition: 0.3s;
+            font-size: 1rem; transition: 0.3s;
             box-shadow: 0 4px 10px var(--shadow-light);
         }
         .contact-item:hover {
@@ -175,7 +183,7 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .main-content { padding: 4rem 3rem; }
+        .main-content { padding: 4rem 4rem; }
         
         .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
         .section-title::after {
@@ -186,7 +194,7 @@
 
         /* About Text */
         .about-text {
-            line-height: 1.8; font-size: 1.15rem; background: #ffffff; padding: 2.5rem;
+            line-height: 1.8; font-size: 1.2rem; background: #ffffff; padding: 2.5rem;
             border-radius: 16px; border-left: 6px solid transparent;
             border-image: var(--rgb-gradient) 1;
             box-shadow: 0 10px 30px var(--shadow-light); transition: 0.3s;
@@ -211,20 +219,20 @@
         }
         .experience-item:hover, .education-item:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         
-        .item-company { font-size: 1.2rem; margin-bottom: 1rem; }
+        .item-company { font-size: 1.25rem; margin-bottom: 1rem; }
         .item-date {
-            position: absolute; right: 2rem; top: 2.5rem; font-size: 0.9rem; font-weight: 700;
+            position: absolute; right: 2rem; top: 2.5rem; font-size: 0.95rem; font-weight: 700;
             background: var(--rgb-gradient); background-size: 200% auto; animation: flowRGB 3s linear infinite;
-            padding: 6px 16px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 8px 18px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .item-description { font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;}
+        .item-description { font-size: 1.15rem; line-height: 1.8; margin-top: 1rem;}
 
         /* Skills */
         .skills-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem; }
         .skill-tag {
             padding: 1rem 1.8rem; border-radius: 12px;
             background: #ffffff; border: 2px solid transparent;
-            font-size: 1.05rem; cursor: pointer; transition: 0.3s;
+            font-size: 1.1rem; cursor: pointer; transition: 0.3s;
             box-shadow: 0 4px 10px var(--shadow-light);
             background-clip: padding-box;
             position: relative;
@@ -238,7 +246,7 @@
         .skill-tag:hover::before { opacity: 1; }
 
         /* Certificates */
-        .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.5rem; }
+        .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 2.5rem; }
         .certificate-card {
             background: #ffffff; border-radius: 20px; padding: 1.5rem;
             border: 1px solid #e2e8f0; transition: 0.4s;
@@ -256,7 +264,7 @@
         }
         .certificate-card:hover::after { opacity: 1; }
 
-        .certificate-image-container { height: 260px; border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 1.5rem; background: #f1f5f9; border: 1px solid #e2e8f0; }
+        .certificate-image-container { height: 280px; border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 1.5rem; background: #f1f5f9; border: 1px solid #e2e8f0; }
         .certificate-pdf { width: 100%; height: 100%; border: none; }
         .pdf-view-button {
             position: absolute; bottom: 1rem; right: 1rem;
@@ -265,7 +273,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
         }
         .pdf-view-button:hover { transform: scale(1.05); }
-        .cert-info h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+        .cert-info h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
 
         /* Featured Final Degree Highlight */
         .featured-cert { overflow: hidden; }
@@ -324,12 +332,13 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .profile-content { flex-direction: column; text-align: center; }
             .item-date { position: relative; right: 0; top: 0; display: inline-block; margin-bottom: 1.5rem;}
             .form-grid { grid-template-columns: 1fr; }
             .main-content { padding: 2rem 1.5rem; }
             .header-section { padding: 3rem 1.5rem; }
+            .container { width: 100%; padding: 1rem 0; }
         }
     </style>
  </head>
@@ -566,7 +575,7 @@
                         ${badge}
                         <div class="certificate-image-container">
                             ${cert.pdfUrl ? `<iframe src="${convertToEmbedUrl(cert.pdfUrl)}" class="certificate-pdf"></iframe>
-                            <a href="${cert.pdfUrl}" target="_blank" class="pdf-view-button">View PDF</a>` : '<p style="text-align:center; padding:100px 20px; font-weight:800;">PDF Coming Soon</p>'}
+                            <a href="${cert.pdfUrl}" target="_blank" class="pdf-view-button">View PDF</a>` : '<p style="text-align:center; padding:120px 20px; font-weight:800;">PDF Coming Soon</p>'}
                         </div>
                         <div class="cert-info">
                             <h3>${cert.title}</h3>
