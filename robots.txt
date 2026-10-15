@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bosebabu25.github.io/pritambose/sitemap.xml
